@@ -43,8 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Clients.cs" />
+    <Compile Include="Models\Rooms.cs" />
+    <Compile Include="Models\RoomStatus.cs" />
+    <Compile Include="Models\VisitJournal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Room.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
