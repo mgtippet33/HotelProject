@@ -70,13 +70,14 @@ namespace HotelProject.Models
             }
         }
 
-        public void CheckInClient(int clientID, int roomNumber = -1, DateTime? from = null, DateTime? to = null)
+        public bool CheckInClient(int clientID, int roomNumber = -1, DateTime? from = null, DateTime? to = null)
         {
             var clientIndex = journal.Select(room => room.ClientID).ToList().IndexOf(clientID);
             var roomIndex = journal.Select(room => room.RoomNumber).ToList().IndexOf(roomNumber);
             if (clientIndex != -1)
             {
                 journal[clientIndex].DroveIn(true);
+                return true;
             }
             else if(roomIndex != -1)
             {
@@ -84,8 +85,10 @@ namespace HotelProject.Models
                 {
                     journal[roomIndex].Edit(false, from.Value, to.Value, clientID);
                     journal[roomIndex].DroveIn(true);
+                    return true;
                 }
             }
+            return false;
         }
 
         public void CheckOutClient(int roomNumber)

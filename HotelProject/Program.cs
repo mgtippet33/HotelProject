@@ -12,7 +12,6 @@ namespace HotelProject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(DateTime.Parse("05.05.2021"));
             VisitJournal journal = new VisitJournal();
             Console.WriteLine("Укажите пункт, который хотите выполнить:");
             while (true)
@@ -91,12 +90,12 @@ namespace HotelProject
                         clientID = AddClient(ref journal);
                         Console.WriteLine("Бронировали? Y\\N");
                         string ans = Console.ReadLine();
-                        if(ans == "Y")
+                        if(ans.ToLower() == "y")
                         {
-                            journal.CheckInClient(clientID);
-                            Console.WriteLine("Вы успешно заселились в отель");
+                            string res = journal.CheckInClient(clientID) ? "Вы успешно заселились в отель" : "Вы не бронировали номер";
+                            Console.WriteLine(res);
                         }
-                        else if(ans == "N")
+                        else if(ans.ToLower() == "n")
                         {
                             RegistrationRoom(ref journal, clientID);
                         }
@@ -113,6 +112,7 @@ namespace HotelProject
                         Console.WriteLine("Укажите один из предложенных пунктов");
                         break;
                 }
+                Console.WriteLine("--------------------");
             }
         }
 
@@ -146,19 +146,20 @@ namespace HotelProject
             Console.WriteLine("Дата заезда:");
             DateTime from, to;
             bool check = DateTime.TryParse(Console.ReadLine(), out from);
-            if (check)
+            if (!check)
             {
                 Console.WriteLine("Неккоректный формат даты заезда!");
                 return;
             }
             Console.WriteLine("Дата выезда:");
             check = DateTime.TryParse(Console.ReadLine(), out to);
-            if (check)
+            if (!check)
             {
                 Console.WriteLine("Неккоректный формат даты выезда!");
                 return;
             }
-            journal.CheckInClient(clientID, roomNumber, from, to);
+            string res = journal.CheckInClient(clientID) ? "Вы успешно заселились в отель" : "Данный номер занят";
+            Console.WriteLine(res);
         }
     }
 }
