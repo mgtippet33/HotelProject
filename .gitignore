@@ -3,3 +3,5 @@ bin
 obj
 /Hotel/.vs/Hotel/v16/*.suo
 /NixCF/NixCF/.vs/NixCF/v14/*.suo
+/.vs
+/Hotel/.vs/Hotel/v16/TestStore/0

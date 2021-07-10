@@ -130,15 +130,18 @@ namespace Hotel.API.Controllers
                 Dictionary<string, decimal> montlyProfit = new Dictionary<string, decimal>();
                 foreach(var reservation in reservations)
                 {
-                    string key = reservation.ArrivalDate.ToString("MMMM");
-                    decimal sum = Decimal.Parse((reservation.DepatureDate - reservation.ArrivalDate).TotalDays.ToString()) * reservation.RoomReservation.RoomCategory.Price;
-                    if (montlyProfit.ContainsKey(key))
+                    if(reservation.ArrivalDate.Year == year)
                     {
-                        montlyProfit[key] += sum;
-                    }
-                    else
-                    {
-                        montlyProfit.Add(key, sum);
+                        string key = reservation.ArrivalDate.ToString("MMMM");
+                        decimal sum = Decimal.Parse((reservation.DepatureDate - reservation.ArrivalDate).TotalDays.ToString()) * reservation.RoomReservation.RoomCategory.Price;
+                        if (montlyProfit.ContainsKey(key))
+                        {
+                            montlyProfit[key] += sum;
+                        }
+                        else
+                        {
+                            montlyProfit.Add(key, sum);
+                        }
                     }
                 }
                 return request.CreateResponse(HttpStatusCode.OK, montlyProfit);
