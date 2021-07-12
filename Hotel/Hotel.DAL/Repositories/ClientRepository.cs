@@ -56,6 +56,8 @@ namespace Hotel.DAL.Repositories
 
         public bool Search(Client client)
         {
+            if (client.Passport == null || client.Surname == null || client.Name == null)
+                return false;
             Client data = db.Clients.SingleOrDefault(cl => cl.Passport == client.Passport);
             if (data != null)
                 return true;

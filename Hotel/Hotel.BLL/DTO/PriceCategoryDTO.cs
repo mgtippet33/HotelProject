@@ -13,5 +13,19 @@ namespace Hotel.BLL.DTO
         public decimal Price { set; get; }
         public DateTime StartDate { set; get; }
         public DateTime EndDate { set; get; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is PriceCategoryDTO)
+            {
+                var objPriceCategory = obj as PriceCategoryDTO;
+                return this.PriceCategoryID == objPriceCategory.PriceCategoryID &&
+                    this.Price == objPriceCategory.Price &&
+                    this.StartDate == objPriceCategory.StartDate &&
+                    this.EndDate == objPriceCategory.EndDate &&
+                    this.CategoryName.Equals(objPriceCategory.CategoryName);
+            }
+            return base.Equals(obj);
+        }
     }
 }

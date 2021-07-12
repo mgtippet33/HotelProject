@@ -17,5 +17,16 @@ namespace Hotel.DAL.Entities
         public string Name { set; get; }
         [Required]
         public string Passport { set; get; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Client)
+            {
+                var objCl = obj as Client;
+                return this.ClientID == objCl.ClientID && this.Surname == objCl.Surname &&
+                    this.Name == objCl.Name && this.Passport == objCl.Passport;
+            }
+            return base.Equals(obj);
+        }
     }
 }

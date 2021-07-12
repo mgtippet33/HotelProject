@@ -14,5 +14,17 @@ namespace Hotel.DAL.Entities
         [Required]
         public string CategoryName { set; get; }
         public int Capacity { set; get; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Category)
+            {
+                var objCategory = obj as Category;
+                return this.CategoryID == objCategory.CategoryID &&
+                    this.CategoryName == objCategory.CategoryName &&
+                    this.Capacity == objCategory.Capacity;
+            }
+            return base.Equals(obj);
+        }
     }
 }

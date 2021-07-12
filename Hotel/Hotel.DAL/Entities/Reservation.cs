@@ -24,5 +24,21 @@ namespace Hotel.DAL.Entities
         public virtual Room RoomReservation { set; get; }
         [ForeignKey("ClientID")]
         public virtual Client ClientResevation { set; get; }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is Reservation)
+            {
+                var objRes = obj as Reservation;
+                return this.ReservationID == objRes.ReservationID &&
+                    this.ReservationDate == objRes.ReservationDate &&
+                    this.ArrivalDate == objRes.ArrivalDate &&
+                    this.DepatureDate == objRes.DepatureDate &&
+                    this.SettledIn == objRes.SettledIn &&
+                    this.RoomReservation.Equals(objRes.RoomReservation) &&
+                    this.ClientResevation.Equals(objRes.ClientResevation);
+            }
+            return base.Equals(obj);
+        }
     }
 }

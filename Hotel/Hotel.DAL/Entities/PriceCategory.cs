@@ -19,5 +19,19 @@ namespace Hotel.DAL.Entities
 
         [ForeignKey("CategoryID")]
         public virtual Category CategoryName { set; get; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is PriceCategory)
+            {
+                var objPriceCategory = obj as PriceCategory;
+                return this.PriceCategoryID == objPriceCategory.PriceCategoryID &&
+                    this.Price == objPriceCategory.Price &&
+                    this.StartDate == objPriceCategory.StartDate &&
+                    this.EndDate == objPriceCategory.EndDate &&
+                    this.CategoryName.Equals(objPriceCategory.CategoryName);
+            }
+            return base.Equals(obj);
+        }
     }
 }
