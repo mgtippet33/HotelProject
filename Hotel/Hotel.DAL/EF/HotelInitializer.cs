@@ -100,6 +100,25 @@ namespace Hotel.DAL.EF
             context.SaveChanges();
         }
 
+        private void UserInitializer(HotelModel context)
+        {
+            var userList = new List<User>()
+            {
+                new User()
+                {
+                    Login = "nix",
+                    Password = "nix",
+                    Surname = "nix",
+                    Name = "nix"
+                }
+            };
+            foreach (var user in userList)
+            {
+                context.Users.Add(user);
+            }
+            context.SaveChanges();
+        }
+
         private void RoomInitializer(HotelModel context)
         {
             var roomList = new List<Room>()
@@ -137,6 +156,7 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 1,
                     ClientID = 1,
+                    UserID = 1,
                     ReservationDate = DateTime.Parse("30.06.2021"),
                     ArrivalDate = DateTime.Parse("01.07.2021"),
                     DepatureDate = DateTime.Parse("15.07.2021"),
@@ -146,6 +166,7 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 1,
                     ClientID = 1,
+                    UserID = 1,
                     ReservationDate = DateTime.Parse("30.06.2021"),
                     ArrivalDate = DateTime.Parse("01.07.2021"),
                     DepatureDate = DateTime.Parse("15.07.2021"),
@@ -155,6 +176,7 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 2,
                     ClientID = 2,
+                    UserID = 1,
                     ReservationDate = DateTime.Parse("15.06.2021"),
                     ArrivalDate = DateTime.Parse("04.07.2021"),
                     DepatureDate = DateTime.Parse("10.07.2021"),
@@ -164,6 +186,7 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 3,
                     ClientID = 3,
+                    UserID = 1,
                     ReservationDate = DateTime.Parse("01.07.2021"),
                     ArrivalDate = DateTime.Parse("10.07.2021"),
                     DepatureDate = DateTime.Parse("15.07.2021"),
@@ -173,6 +196,7 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 3,
                     ClientID = 2,
+                    UserID = 1,
                     ReservationDate = DateTime.Parse("02.07.2021"),
                     ArrivalDate = DateTime.Parse("02.08.2021"),
                     DepatureDate = DateTime.Parse("21.08.2021"),
@@ -185,11 +209,13 @@ namespace Hotel.DAL.EF
             }
             context.SaveChanges();
         }
+
         protected override void Seed(HotelModel context)
         {
             CategoryInitializer(context);
             PriceCategoryInitializer(context);
             ClientInitializer(context);
+            UserInitializer(context);
             RoomInitializer(context);
             ReservationInitializer(context);
         }

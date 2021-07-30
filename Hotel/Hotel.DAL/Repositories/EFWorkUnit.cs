@@ -13,6 +13,7 @@ namespace Hotel.DAL.Repositories
     {
         private HotelModel db;
         private ClientRepository clientRepository;
+        private UserRepository userRepository;
         private CategoryRepository categoryRepository;
         private PriceCategoryRepository priceCategoryRepository;
         private RoomRepository roomRepository;
@@ -32,6 +33,17 @@ namespace Hotel.DAL.Repositories
                     clientRepository = new ClientRepository(db);
                 }
                 return clientRepository;
+            }
+        }
+        public IRepository<User> Users
+        {
+            get
+            {
+                if(userRepository == null)
+                {
+                    userRepository = new UserRepository(db);
+                }
+                return userRepository;
             }
         }
 

@@ -14,6 +14,7 @@ namespace Hotel.DAL.Entities
         public int ReservationID { set; get; }
         public int RoomID { set; get; }
         public int ClientID { set; get; }
+        public int UserID { set; get; }
         public DateTime? ReservationDate { set; get; }
         public DateTime ArrivalDate { set; get; }
         public DateTime DepatureDate { set; get; }
@@ -24,6 +25,8 @@ namespace Hotel.DAL.Entities
         public virtual Room RoomReservation { set; get; }
         [ForeignKey("ClientID")]
         public virtual Client ClientResevation { set; get; }
+        [ForeignKey("UserID")]
+        public virtual User UserReservation { set; get; }
 
         public override bool Equals(object obj)
         {
@@ -36,7 +39,8 @@ namespace Hotel.DAL.Entities
                     this.DepatureDate == objRes.DepatureDate &&
                     this.SettledIn == objRes.SettledIn &&
                     this.RoomReservation.Equals(objRes.RoomReservation) &&
-                    this.ClientResevation.Equals(objRes.ClientResevation);
+                    this.ClientResevation.Equals(objRes.ClientResevation) &&
+                    this.UserReservation.Equals(objRes.UserReservation);
             }
             return base.Equals(obj);
         }

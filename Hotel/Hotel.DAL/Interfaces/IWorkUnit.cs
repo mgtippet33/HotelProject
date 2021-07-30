@@ -10,6 +10,7 @@ namespace Hotel.DAL.Interfaces
     public interface IWorkUnit
     {
         IRepository<Client> Clients { get; }
+        IRepository<User> Users { get; }
         IRepository<Category> Categories { get; }
         IRepository<PriceCategory> PriceCategories { get; }
         IRepository<Room> Rooms { get; }
