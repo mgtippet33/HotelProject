@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Hotel.BLL.Services
 {
-    public class UserService : IService<UserDTO>
+    public class UserService : IUserService
     {
         private IWorkUnit DataBase { set; get; }
         private IMapper toDTOMapper;
@@ -60,6 +60,13 @@ namespace Hotel.BLL.Services
             var data = fromDTOMapper.Map<UserDTO, User>(item);
             DataBase.Users.Update(id, data);
             DataBase.Save();
+        }
+
+        public UserDTO Login(UserDTO user)
+        {
+            var data = fromDTOMapper.Map<UserDTO, User>(user);
+            var result = DataBase.Users.Login(data);
+            return toDTOMapper.Map<User, UserDTO>(result);
         }
     }
 }

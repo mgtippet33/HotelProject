@@ -35,7 +35,7 @@ namespace Hotel.DAL.Repositories
                 return clientRepository;
             }
         }
-        public IRepository<User> Users
+        public IUserRepository Users
         {
             get
             {

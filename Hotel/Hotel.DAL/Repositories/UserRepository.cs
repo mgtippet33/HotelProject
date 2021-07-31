@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hotel.DAL.Repositories
 {
-    class UserRepository : IRepository<User>
+    class UserRepository : IUserRepository
     {
         private HotelModel db;
 
@@ -44,6 +44,7 @@ namespace Hotel.DAL.Repositories
 
         public bool Search(User item)
         {
+
             if (item.Login == null || item.Surname == null || item.Name == null)
                 return false;
             User data = db.Users.SingleOrDefault(st => st.Login == item.Login);
@@ -63,6 +64,12 @@ namespace Hotel.DAL.Repositories
                 userUpdate.Login = item.Login ?? userUpdate.Login;
                 userUpdate.Password = item.Password ?? userUpdate.Password;
             }
+        }
+
+        public User Login(User user)
+        {
+            var data = db.Users.FirstOrDefault(u => u.Login == user.Login && u.Password == user.Password);
+            return data;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Hotel.Web.Utils
     {
         public override void Load()
         {
-            Bind<IService<UserDTO>>().To<UserService>();
+            Bind<IUserService>().To<UserService>();
         }
     }
 }

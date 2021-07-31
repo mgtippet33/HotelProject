@@ -1,5 +1,6 @@
 using Hotel.BLL.Infrastructure;
 using Hotel.Web.Utils;
+using HotelWEB.Utils;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Web.WebApi.Filter;
@@ -30,11 +31,17 @@ namespace Hotel.Web
             NinjectModule roomModule = new RoomModule();
             NinjectModule reservationModule = new ReservationModule();
             NinjectModule dependencyModule = new DependencyModule("HotelModel");
-            var kernel = new StandardKernel(clientModule, usertModule, categoryModule,
-                priceCategoryModule, roomModule, reservationModule, dependencyModule);
-            kernel.Bind<DefaultFilterProviders>().ToSelf().WithConstructorArgument(GlobalConfiguration.Configuration.Services.GetFilterProviders());
-            kernel.Bind<DefaultModelValidatorProviders>().ToConstant(new DefaultModelValidatorProviders(GlobalConfiguration.Configuration.Services.GetModelValidatorProviders()));
-            GlobalConfiguration.Configuration.DependencyResolver = new Ninject.Web.WebApi.NinjectDependencyResolver(kernel);
+
+            var kernel = new StandardKernel(dependencyModule, categoryModule);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory(kernel));
+
+            //var kernel = new StandardKernel(clientModule, usertModule, categoryModule,
+            //    priceCategoryModule, roomModule, reservationModule, dependencyModule);
+            //kernel.Bind<DefaultFilterProviders>().ToSelf().WithConstructorArgument(GlobalConfiguration.Configuration.Services.GetFilterProviders());
+            //kernel.Bind<DefaultModelValidatorProviders>().ToConstant(new DefaultModelValidatorProviders(GlobalConfiguration.Configuration.Services.GetModelValidatorProviders()));
+            //GlobalConfiguration.Configuration.DependencyResolver = new Ninject.Web.WebApi.NinjectDependencyResolver(kernel);
+
         }
     }
 }
