@@ -3,12 +3,6 @@ using Hotel.Web.Utils;
 using HotelWEB.Utils;
 using Ninject;
 using Ninject.Modules;
-using Ninject.Web.WebApi.Filter;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -32,7 +26,8 @@ namespace Hotel.Web
             NinjectModule reservationModule = new ReservationModule();
             NinjectModule dependencyModule = new DependencyModule("HotelModel");
 
-            var kernel = new StandardKernel(dependencyModule, categoryModule);
+            var kernel = new StandardKernel(dependencyModule, usertModule, clientModule,
+                categoryModule, priceCategoryModule, roomModule, reservationModule);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory(kernel));
 

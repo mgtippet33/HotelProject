@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +10,7 @@ namespace Hotel.Web.Models
     {
         public int UserID { set; get; }
         public string Login { set; get; }
+        [DataType(DataType.Password)]
         public string Password { set; get; }
         public string Surname { set; get; }
         public string Name { set; get; }

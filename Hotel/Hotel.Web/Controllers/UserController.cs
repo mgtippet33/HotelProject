@@ -50,5 +50,10 @@ namespace Hotel.Web.Controllers
             }
             return View(user);
         }
+
+        public ActionResult Register()
+        {
+            View();
+        }
     }
 }
