@@ -9,8 +9,11 @@ namespace Hotel.Web.Models
     public class UserModel
     {
         public int UserID { set; get; }
+        [Required]
         public string Login { set; get; }
         [DataType(DataType.Password)]
+        [Required]
+        //[RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6}$")]
         public string Password { set; get; }
         public string Surname { set; get; }
         public string Name { set; get; }

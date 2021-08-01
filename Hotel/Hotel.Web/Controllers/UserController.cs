@@ -53,7 +53,33 @@ namespace Hotel.Web.Controllers
 
         public ActionResult Register()
         {
-            View();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterUserModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                UserModel user = new UserModel()
+                {
+                    Login = model.Login,
+                    Password = model.Password,
+                    Surname = model.Surname,
+                    Name = model.Name
+                };
+                var userDTO = toDTOMapper.Map<UserModel, UserDTO>(user);
+                if (!service.Check(userDTO))
+                {
+                    service.Create(userDTO);
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "User with such login already exist");
+                }
+            }
+            return View();
         }
     }
 }

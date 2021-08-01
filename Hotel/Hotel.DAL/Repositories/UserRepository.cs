@@ -44,9 +44,6 @@ namespace Hotel.DAL.Repositories
 
         public bool Search(User item)
         {
-
-            if (item.Login == null || item.Surname == null || item.Name == null)
-                return false;
             User data = db.Users.SingleOrDefault(st => st.Login == item.Login);
             if (data != null)
                 return true;
