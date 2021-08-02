@@ -37,13 +37,14 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.Password = user.HashedPassword;
                 var userDTO = toDTOMapper.Map<UserModel, UserDTO>(user);
                 var data = service.Login(userDTO);
                 if (data != null)
                 {
                     UserModel userModel = fromDTOMapper.Map<UserDTO, UserModel>(data);
-                    FormsAuthentication.SetAuthCookie(user.Login, true);
-                    return RedirectToAction("Index", "Home");
+                    FormsAuthentication.SetAuthCookie(userModel.Login, true);
+                    return RedirectToAction("Index", "Category");
                 }
                 ModelState.AddModelError("", "User not found");
 
@@ -64,7 +65,7 @@ namespace Hotel.Web.Controllers
                 UserModel user = new UserModel()
                 {
                     Login = model.Login,
-                    Password = model.Password,
+                    Password = model.HashedPassword,
                     Surname = model.Surname,
                     Name = model.Name
                 };

@@ -1,0 +1,23 @@
+﻿@model Hotel.Web.Models.CategoryModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryName)
+            @Html.EditorFor(model => model.CategoryName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Capacity)
+            @Html.EditorFor(model => model.Capacity)
+        </div>
+        <div class="form-group">
+            <input type="submit" action="Create" class="btn" value="Create" />
+        </div>
+    </div>
+}

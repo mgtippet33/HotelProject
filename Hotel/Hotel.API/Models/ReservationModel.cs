@@ -12,7 +12,7 @@ namespace Hotel.API.Models
         public ClientModel ClientResevation { set; get; }
         public DateTime? ReservationDate { set; get; }
         public DateTime ArrivalDate { set; get; }
-        public DateTime DepatureDate { set; get; }
+        public DateTime DepartureDate { set; get; }
         public bool SettledIn { set; get; }
 
         public override bool Equals(object obj)
@@ -23,7 +23,7 @@ namespace Hotel.API.Models
                 return this.ReservationID == objRes.ReservationID &&
                     this.ReservationDate == objRes.ReservationDate &&
                     this.ArrivalDate == objRes.ArrivalDate &&
-                    this.DepatureDate == objRes.DepatureDate &&
+                    this.DepartureDate == objRes.DepartureDate &&
                     this.SettledIn == objRes.SettledIn &&
                     this.RoomReservation.Equals(objRes.RoomReservation) &&
                     this.ClientResevation.Equals(objRes.ClientResevation);

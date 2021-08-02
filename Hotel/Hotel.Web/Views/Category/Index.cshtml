@@ -1,0 +1,50 @@
+﻿@model List<Hotel.Web.Models.CategoryModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model[0].CategoryName)
+            </th>
+            <th>
+                @Html.LabelFor(model => model[0].Capacity)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Raw(category.CategoryName)
+                </td>
+                <td>
+                    @Html.Raw(category.Capacity)
+                </td>
+                @*<td>
+                    @Html.ActionLink("Details", "Details", new
+                    {
+                        id = category.Id
+                    })
+                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new
+                    {
+                        id = category.CategoryID
+                    })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new
+                    {
+                        id = category.CategoryID
+                    })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.ActionLink("Create", "Create", null, new[] { "btn" })

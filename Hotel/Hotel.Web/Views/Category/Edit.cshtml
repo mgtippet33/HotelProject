@@ -1,0 +1,22 @@
+﻿@model Hotel.Web.Models.CategoryModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryName)
+            @Html.EditorFor(model => model.CategoryName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Capacity)
+            @Html.EditorFor(model => model.Capacity)
+        </div>
+        <div class="form-group">
+            <input type="submit" action="Edit" class="btn" value="Edit" />
+        </div>
+    </div>
+}

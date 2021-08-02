@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
+using System.Web.Helpers;
 
 namespace Hotel.Web.Models
 {
@@ -17,6 +20,14 @@ namespace Hotel.Web.Models
         public string Password { set; get; }
         public string Surname { set; get; }
         public string Name { set; get; }
+
+        public string HashedPassword
+        {
+            get
+            {
+                return Crypto.Hash(this.Password);
+            }
+        }
 
         public override bool Equals(object obj)
         {

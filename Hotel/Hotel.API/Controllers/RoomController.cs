@@ -85,9 +85,9 @@ namespace Hotel.API.Controllers
                        cfg.CreateMap<ClientDTO, ClientModel>().ReverseMap();
                    }).CreateMapper();
                 var reservations = reservationMapper.Map<IEnumerable<ReservationDTO>, List<ReservationModel>>(reservationData);
-                var busyRooms = reservations.Where(r => ((r.ArrivalDate >= arrivalDate && (depatureDate >= r.DepatureDate || depatureDate <= r.DepatureDate)) ||
-                                                         (r.ArrivalDate <= arrivalDate && (depatureDate >= r.DepatureDate || depatureDate <= r.DepatureDate))) &&
-                                                         r.DepatureDate >= arrivalDate && r.ArrivalDate <= depatureDate).
+                var busyRooms = reservations.Where(r => ((r.ArrivalDate >= arrivalDate && (depatureDate >= r.DepartureDate || depatureDate <= r.DepartureDate)) ||
+                                                         (r.ArrivalDate <= arrivalDate && (depatureDate >= r.DepartureDate || depatureDate <= r.DepartureDate))) &&
+                                                         r.DepartureDate >= arrivalDate && r.ArrivalDate <= depatureDate).
                                                          GroupBy(r => r.RoomReservation.RoomID).Select(r => r.First()).ToList();
 
                 var roomData = roomService.GetAll();
