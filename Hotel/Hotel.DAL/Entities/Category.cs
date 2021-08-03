@@ -13,6 +13,7 @@ namespace Hotel.DAL.Entities
         public int CategoryID { set; get; }
         [Required]
         public string CategoryName { set; get; }
+        [Required]
         public int Capacity { set; get; }
 
         public override bool Equals(object obj)

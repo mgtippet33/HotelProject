@@ -12,12 +12,17 @@ namespace Hotel.DAL.Entities
     {
         [Key]
         public int PriceCategoryID { set; get; }
+        [Required]
         public int CategoryID { set; get; }
+        [Required]
         public decimal Price { set; get; }
+        [Required]
         public DateTime StartDate { set; get; }
+        [Required]
         public DateTime EndDate { set; get; }
 
         [ForeignKey("CategoryID")]
+        [Required]
         public virtual Category CategoryName { set; get; }
 
         public override bool Equals(object obj)

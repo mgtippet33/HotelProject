@@ -14,10 +14,13 @@ namespace Hotel.DAL.Entities
         public int RoomID { set; get; }
         [Required]
         public string RoomName { set; get; }
+        [Required]
         public int PriceCategoryID { set; get; }
+        [Required]
         public bool Active { set; get; }
 
         [ForeignKey("PriceCategoryID")]
+        [Required]
         public virtual PriceCategory RoomCategory { set; get; }
 
         public override bool Equals(object obj)
