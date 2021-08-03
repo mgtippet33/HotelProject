@@ -133,7 +133,7 @@ namespace Hotel.API.Controllers
                     if(reservation.ArrivalDate.Year == year)
                     {
                         string key = reservation.ArrivalDate.ToString("MMMM");
-                        decimal sum = Decimal.Parse((reservation.DepatureDate - reservation.ArrivalDate).TotalDays.ToString()) * reservation.RoomReservation.RoomCategory.Price;
+                        decimal sum = Decimal.Parse((reservation.DepartureDate - reservation.ArrivalDate).TotalDays.ToString()) * reservation.RoomReservation.RoomCategory.Price;
                         if (montlyProfit.ContainsKey(key))
                         {
                             montlyProfit[key] += sum;

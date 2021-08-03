@@ -1,0 +1,32 @@
+﻿@model Dictionary<string, decimal>
+@{
+    ViewBag.Title = "Monthly Profit";
+}
+
+<h2>Monthly Profit for @ViewBag.Year year</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("Month")
+            </th>
+            <th>
+                @Html.Label("Money")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var value in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Raw(value.Key)
+                </td>
+                <td>
+                    @Html.Raw(value.Value)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

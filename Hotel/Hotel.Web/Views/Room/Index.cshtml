@@ -1,0 +1,58 @@
+﻿@model List<Hotel.Web.Models.RoomModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model[0].RoomName)
+            </th>
+            <th>
+                @Html.LabelFor(model => model[0].RoomCategory.CategoryName.CategoryName)
+            </th>
+            <th>
+                @Html.LabelFor(model => model[0].RoomCategory.Price)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model)
+        {
+        <tr>
+            <td>
+                @Html.Raw(room.RoomName)
+            </td>
+            <td>
+                @Html.Raw(room.RoomCategory.CategoryName.CategoryName)
+            </td>
+            <td>
+                @Html.Raw(room.RoomCategory.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new
+                {
+                    id = room.RoomID
+                })
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new
+           {
+               id = room.RoomID
+           })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new
+           {
+               id = room.RoomID
+           })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@Html.ActionLink("Create", "Create", null, new[] { "btn" }) <br />
+@Html.ActionLink("Search Free Rooms", "SearchFreeRooms", null, new[] {"btn"})

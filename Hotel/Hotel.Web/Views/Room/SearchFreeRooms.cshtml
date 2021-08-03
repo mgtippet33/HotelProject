@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Search Free Rooms";
+}
+
+<h2>Search Free Rooms</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Arrival Date")
+            <input type="datetime-local" name="ArrivalDate" id="ArrivalDate"/>
+        </div>
+        <div class="form-group">
+            @Html.Label("Departure Date")
+            <input type="datetime-local" name="DepartureDate" id="DepartureDate"/>
+        </div>
+        <div class="form-group">
+            <input type="submit" action="SearchFreeRooms" class="btn" value="SearchFreeRooms" />
+        </div>
+    </div>
+}

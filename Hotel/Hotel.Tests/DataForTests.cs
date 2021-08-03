@@ -153,7 +153,7 @@ namespace Hotel.Tests
                         ClientID = 1,
                         ReservationDate = DateTime.Parse("30.06.2021"),
                         ArrivalDate = DateTime.Parse("01.07.2021"),
-                        DepatureDate = DateTime.Parse("15.07.2021"),
+                        DepartureDate = DateTime.Parse("15.07.2021"),
                         SettledIn = true,
                         RoomReservation = Rooms[0],
                         ClientResevation = Clients[0]
@@ -178,7 +178,7 @@ namespace Hotel.Tests
                         ClientID = 2,
                         ReservationDate = DateTime.Parse("15.06.2021"),
                         ArrivalDate = DateTime.Parse("04.07.2021"),
-                        DepatureDate = DateTime.Parse("10.07.2021"),
+                        DepartureDate = DateTime.Parse("10.07.2021"),
                         SettledIn = false,
                         RoomReservation = Rooms[1],
                         ClientResevation = Clients[1]
@@ -190,7 +190,7 @@ namespace Hotel.Tests
                         ClientID = 3,
                         ReservationDate = DateTime.Parse("01.07.2021"),
                         ArrivalDate = DateTime.Parse("15.07.2021"),
-                        DepatureDate = DateTime.Parse("25.07.2021"),
+                        DepartureDate = DateTime.Parse("25.07.2021"),
                         SettledIn = false,
                         RoomReservation = Rooms[2],
                         ClientResevation = Clients[1]
@@ -202,7 +202,7 @@ namespace Hotel.Tests
                         ClientID = 2,
                         ReservationDate = DateTime.Parse("02.07.2021"),
                         ArrivalDate = DateTime.Parse("02.08.2021"),
-                        DepatureDate = DateTime.Parse("21.08.2021"),
+                        DepartureDate = DateTime.Parse("21.08.2021"),
                         SettledIn = false,
                         RoomReservation = Rooms[2],
                         ClientResevation = Clients[0]

@@ -1,0 +1,62 @@
+﻿@model List<Hotel.Web.Models.PriceCategoryModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model[0].CategoryName)
+            </th>
+            <th>
+                @Html.LabelFor(model => model[0].Price)
+            </th>
+            <th>
+                @Html.LabelFor(model => model[0].StartDate)
+            </th>
+            <th>
+                @Html.LabelFor(model => model[0].EndDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var priceCategory in Model)
+        {
+        <tr>
+            <td>
+                @Html.Raw(priceCategory.CategoryName.CategoryName)
+            </td>
+            <td>
+                @Html.Raw(priceCategory.Price)
+            </td>
+            <td>
+                @Html.Raw(priceCategory.StartDate)
+            </td>
+            <td>
+                @Html.Raw(priceCategory.EndDate)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new
+                {
+                    id = priceCategory.PriceCategoryID
+                })
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new
+                {
+                    id = priceCategory.PriceCategoryID
+                })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new
+                {
+                    id = priceCategory.PriceCategoryID
+                })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@Html.ActionLink("Create", "Create", null, new[] { "btn" })

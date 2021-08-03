@@ -1,0 +1,49 @@
+﻿@model Hotel.Web.Models.PriceCategoryModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Price of Category @Model.CategoryName.CategoryName</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.CategoryName.CategoryName)
+        </th>
+        <td>
+            @Model.CategoryName.CategoryName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.CategoryName.Capacity)
+        </th>
+        <td>
+            @Model.CategoryName.Capacity
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.Price)
+        </th>
+        <td>
+            @Model.Price
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.StartDate)
+        </th>
+        <td>
+            @Model.StartDate
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.EndDate)
+        </th>
+        <td>
+            @Model.EndDate
+        </td>
+    </tr>
+</table>

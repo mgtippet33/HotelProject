@@ -55,14 +55,14 @@ namespace Hotel.DAL.Repositories
                 reservationUpdate.ReservationID = reservationID;
                 reservationUpdate.ReservationDate = value.ReservationDate ?? reservationUpdate.ReservationDate;
                 reservationUpdate.ArrivalDate = value.ArrivalDate != reservationUpdate.ArrivalDate ? value.ArrivalDate : reservationUpdate.ArrivalDate;
-                reservationUpdate.DepatureDate = value.DepatureDate != reservationUpdate.DepatureDate ? value.DepatureDate : reservationUpdate.DepatureDate;
+                reservationUpdate.DepartureDate = value.DepartureDate != reservationUpdate.DepartureDate ? value.DepartureDate : reservationUpdate.DepartureDate;
                 reservationUpdate.SettledIn = value.SettledIn;
             }
         }
         public bool Search(Reservation reservation)
         {
             var data = db.Reservations.SingleOrDefault(item => item.RoomReservation.RoomID == reservation.RoomReservation.RoomID &&
-            item.ArrivalDate == reservation.ArrivalDate && item.DepatureDate == reservation.DepatureDate);
+            item.ArrivalDate == reservation.ArrivalDate && item.DepartureDate == reservation.DepartureDate);
             if (data != null)
                 return true;
             return false;

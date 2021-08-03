@@ -10,23 +10,29 @@ using System.Web.Mvc;
 
 namespace Hotel.Web.Controllers
 {
-    public class CategoryController : Controller
+    public class ClientController : Controller
     {
-        private IService<CategoryDTO> service;
+        private IService<ClientDTO> service;
         private IMapper toDTOMapper;
         private IMapper fromDTOMapper;
 
-        public CategoryController(IService<CategoryDTO> service)
+        public ClientController(IService<ClientDTO> service)
         {
             this.service = service;
-            toDTOMapper = new MapperConfiguration(cfg => cfg.CreateMap<CategoryModel, CategoryDTO>()).CreateMapper();
-            fromDTOMapper = new MapperConfiguration(cfg => cfg.CreateMap<CategoryDTO, CategoryModel>()).CreateMapper();
+            fromDTOMapper = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientModel>()).CreateMapper();
+            toDTOMapper = new MapperConfiguration(cfg => cfg.CreateMap<ClientModel, ClientDTO>()).CreateMapper();
         }
 
-        // GET: Category
+        // GET: Client
         public ActionResult Index()
         {
-            var data = fromDTOMapper.Map<IEnumerable<CategoryDTO>, List<CategoryModel>>(service.GetAll());
+            var data = fromDTOMapper.Map<IEnumerable<ClientDTO>, List<ClientModel>>(service.GetAll());
+            return View(data);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var data = fromDTOMapper.Map<ClientDTO, ClientModel>(service.Get(id));
             return View(data);
         }
 
@@ -37,17 +43,18 @@ namespace Hotel.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CategoryModel category)
+        public ActionResult Create(ClientModel model)
         {
             if (ModelState.IsValid)
             {
-                var modelDTO = toDTOMapper.Map<CategoryModel, CategoryDTO>(category);
+                //model.ActionUserId = Convert.ToInt32(User.Identity.Name);
+                var modelDTO = toDTOMapper.Map<ClientModel, ClientDTO>(model);
                 if (!service.Check(modelDTO))
                 {
                     service.Create(modelDTO);
                     return RedirectToAction("Index");
                 }
-                ModelState.AddModelError("", "This category already exists");
+                ModelState.AddModelError("", "This client already exists");
                 return View();
             }
             else
@@ -60,20 +67,25 @@ namespace Hotel.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var data = fromDTOMapper.Map<CategoryDTO, CategoryModel>(service.Get(id));
+            var data = fromDTOMapper.Map<ClientDTO, ClientModel>(service.Get(id));
             return View(data);
         }
 
         [HttpPost]
-        public ActionResult Edit(CategoryModel model)
+        public ActionResult Edit(ClientModel model)
         {
             if (ModelState.IsValid)
             {
                 //model.ActionUserId = Convert.ToInt32(User.Identity.Name);
-                model.CategoryID = Int32.Parse(Request.Url.Segments[3]);
-                var modelDTO = toDTOMapper.Map<CategoryModel, CategoryDTO>(model);
-                service.Update(modelDTO.CategoryID, modelDTO);
-                return RedirectToAction("Index");
+                model.ClientID = Int32.Parse(Request.Url.Segments[3]);
+                var modelDTO = toDTOMapper.Map<ClientModel, ClientDTO>(model);
+                if (!service.Check(modelDTO))
+                {
+                    service.Update(modelDTO.ClientID, modelDTO);
+                    return RedirectToAction("Index");
+                }
+                ModelState.AddModelError("", "This client already exists");
+                return View();
             }
             else
             {

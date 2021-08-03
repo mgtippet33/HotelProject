@@ -1,0 +1,57 @@
+﻿@model Hotel.Web.Models.RoomModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.RoomName)
+        </th>
+        <td>
+            @Model.RoomName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.RoomCategory.CategoryName.CategoryName)
+        </th>
+        <td>
+            @Model.RoomCategory.CategoryName.CategoryName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.RoomCategory.CategoryName.Capacity)
+        </th>
+        <td>
+            @Model.RoomCategory.CategoryName.Capacity
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.RoomCategory.Price)
+        </th>
+        <td>
+            @Model.RoomCategory.Price
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.RoomCategory.StartDate)
+        </th>
+        <td>
+            @Model.RoomCategory.StartDate
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.RoomCategory.EndDate)
+        </th>
+        <td>
+            @Model.RoomCategory.EndDate
+        </td>
+    </tr>
+</table>

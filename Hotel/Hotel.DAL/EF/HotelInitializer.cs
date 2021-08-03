@@ -156,50 +156,50 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 1,
                     ClientID = 1,
-                    UserID = 1,
+                    //UserID = 1,
                     ReservationDate = DateTime.Parse("30.06.2021"),
                     ArrivalDate = DateTime.Parse("01.07.2021"),
-                    DepatureDate = DateTime.Parse("15.07.2021"),
+                    DepartureDate = DateTime.Parse("15.07.2021"),
                     SettledIn = true
                 },
                 new Reservation()
                 {
                     RoomID = 1,
                     ClientID = 1,
-                    UserID = 1,
+                    //UserID = 1,
                     ReservationDate = DateTime.Parse("30.06.2021"),
                     ArrivalDate = DateTime.Parse("01.07.2021"),
-                    DepatureDate = DateTime.Parse("15.07.2021"),
+                    DepartureDate = DateTime.Parse("15.07.2021"),
                     SettledIn = true
                 },
                 new Reservation()
                 {
                     RoomID = 2,
                     ClientID = 2,
-                    UserID = 1,
+                    //UserID = 1,
                     ReservationDate = DateTime.Parse("15.06.2021"),
                     ArrivalDate = DateTime.Parse("04.07.2021"),
-                    DepatureDate = DateTime.Parse("10.07.2021"),
+                    DepartureDate = DateTime.Parse("10.07.2021"),
                     SettledIn = false
                 },
                 new Reservation()
                 {
                     RoomID = 3,
                     ClientID = 3,
-                    UserID = 1,
+                    //UserID = 1,
                     ReservationDate = DateTime.Parse("01.07.2021"),
                     ArrivalDate = DateTime.Parse("10.07.2021"),
-                    DepatureDate = DateTime.Parse("15.07.2021"),
+                    DepartureDate = DateTime.Parse("15.07.2021"),
                     SettledIn = false
                 },
                 new Reservation()
                 {
                     RoomID = 3,
                     ClientID = 2,
-                    UserID = 1,
+                    //UserID = 1,
                     ReservationDate = DateTime.Parse("02.07.2021"),
                     ArrivalDate = DateTime.Parse("02.08.2021"),
-                    DepatureDate = DateTime.Parse("21.08.2021"),
+                    DepartureDate = DateTime.Parse("21.08.2021"),
                     SettledIn = false
                 }
             };

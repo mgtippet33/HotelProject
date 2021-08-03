@@ -1,0 +1,35 @@
+﻿@model Hotel.Web.Models.ReservationModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Reservation</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("FullName")
+            @Html.DropDownListFor(model => model.ClientResevation.ClientID, (SelectList)ViewBag.Clients)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoomReservation.RoomName)
+            @Html.DropDownListFor(model => model.RoomReservation.RoomID, (SelectList)ViewBag.Rooms)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ArrivalDate)
+            <input type="datetime-local" name="ArrivalDate" />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartureDate)
+            <input type="datetime-local" name="DepartureDate" />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SettledIn)
+            @Html.EditorFor(model => model.SettledIn)
+        </div>
+        <div class="form-group">
+            <input type="submit" action="Create" class="btn" value="Create" />
+        </div>
+    </div>
+}

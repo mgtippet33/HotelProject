@@ -1,0 +1,34 @@
+﻿@model Hotel.Web.Models.ClientModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Client №@Model.ClientID</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.Surname)
+        </th>
+        <td>
+            @Model.Surname
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.Name)
+        </th>
+        <td>
+            @Model.Name
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.Passport)
+        </th>
+        <td>
+            @Model.Passport
+        </td>
+    </tr>
+</table>

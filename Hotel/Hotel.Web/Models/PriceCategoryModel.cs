@@ -11,7 +11,7 @@ namespace Hotel.Web.Models
         public int PriceCategoryID { set; get; }
         [DisplayName("Name of category")]
         public CategoryModel CategoryName { set; get; }
-        [DisplayName("Name of category")]
+        [DisplayName("Price of category")]
         public decimal Price { set; get; }
         [DisplayName("Start of category")]
         public DateTime StartDate { set; get; }

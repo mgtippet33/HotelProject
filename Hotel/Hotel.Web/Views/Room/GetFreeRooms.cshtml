@@ -1,0 +1,65 @@
+﻿@model List<Hotel.Web.Models.RoomModel>
+
+@{
+    ViewBag.Title = "GetFreeRooms";
+}
+
+<h2>GetFreeRooms</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Arrival Date")
+            @if (ViewBag.ArrivalDate != null)
+            {
+                @Html.Raw(ViewBag.ArrivalDate.ToString("yyyy-MM-ddThh:mm"))
+            }
+        </div>
+        <div class="form-group">
+            @Html.Label("Departure Date")
+            @if (ViewBag.DepartureDate != null)
+            {
+                @Html.Raw(ViewBag.DepartureDate.ToString("yyyy-MM-ddThh:mm"))
+            }
+        </div>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.LabelFor(model => model[0].RoomName)
+                </th>
+                <th>
+                    @Html.LabelFor(model => model[0].RoomCategory.CategoryName.CategoryName)
+                </th>
+                <th>
+                    @Html.LabelFor(model => model[0].RoomCategory.Price)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var room in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.Raw(room.RoomName)
+                    </td>
+                    <td>
+                        @Html.Raw(room.RoomCategory.CategoryName.CategoryName)
+                    </td>
+                    <td>
+                        @Html.Raw(room.RoomCategory.Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new
+                        {
+                            id = room.RoomID
+                        })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -87,7 +87,7 @@ namespace Hotel.Tests.ServiceTests
                 ReservationID = 5,
                 ReservationDate = DateTime.Parse("12.07.2021"),
                 ArrivalDate = DateTime.Parse("01.08.2021"),
-                DepatureDate = DateTime.Parse("11.08.2021"),
+                DepartureDate = DateTime.Parse("11.08.2021"),
                 SettledIn = false,
                 RoomReservation = roomMapper.Map<Room, RoomDTO>(DataForTests.Rooms[0]),
                 ClientResevation = clientMapper.Map<Client, ClientDTO>(DataForTests.Clients[2])

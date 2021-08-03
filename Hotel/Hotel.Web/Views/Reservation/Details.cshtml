@@ -1,0 +1,65 @@
+﻿@model Hotel.Web.Models.ReservationModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Reservation @Model.ReservationID</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.Label("FullName")
+        </th>
+        <td>
+            @(Model.ClientResevation.Surname + " " + @Model.ClientResevation.Name)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.RoomReservation.RoomName)
+        </th>
+        <td>
+            @Model.RoomReservation.RoomName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.RoomReservation.RoomCategory.CategoryName)
+        </th>
+        <td>
+            @Model.RoomReservation.RoomCategory.CategoryName.CategoryName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.ReservationDate)
+        </th>
+        <td>
+            @Model.ReservationDate
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.ArrivalDate)
+        </th>
+        <td>
+            @Model.ArrivalDate
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.DepartureDate)
+        </th>
+        <td>
+            @Model.DepartureDate
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.SettledIn)
+        </th>
+        <td>
+            @Model.SettledIn
+        </td>
+    </tr>
+</table>

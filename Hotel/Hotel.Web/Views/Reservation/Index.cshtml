@@ -1,0 +1,83 @@
+﻿@model List<Hotel.Web.Models.ReservationModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("FullName")
+            </th>
+            <th>
+                @Html.LabelFor(model => model[0].RoomReservation.RoomName)
+            </th>
+            <th>
+                @Html.LabelFor(model => model[0].ArrivalDate)
+            </th>
+            <th>
+                @Html.LabelFor(model => model[0].DepartureDate)
+            </th>
+            <th>
+                @Html.Label("Settled In")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Raw(reservation.ClientResevation.Surname + " " + reservation.ClientResevation.Name)
+                </td>
+                <td>
+                    @Html.Raw(reservation.RoomReservation.RoomName)
+                </td>
+                <td>
+                    @Html.Raw(reservation.ArrivalDate)
+                </td>
+                <td>
+                    @Html.Raw(reservation.DepartureDate)
+                </td>
+                @*<td>
+                        @Html.Raw(reservation.SettledIn)
+                    </td>*@
+                <td>
+                    @if (!reservation.SettledIn)
+                    {
+
+                        @Html.ActionLink("Check In", "CheckIn", new
+                   {
+                       reservationID = reservation.ReservationID
+                   })
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new
+               {
+                   id = reservation.ReservationID
+               })
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new
+               {
+                   id = reservation.ReservationID
+               })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new
+               {
+                   id = reservation.ReservationID
+               })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.ActionLink("Create", "Create", null, new[] { "btn" }) <br />
+@Html.ActionLink("Monthly profit", "MonthlyProfit", new
+{
+    _year = DateTime.Now.Year.ToString()
+})
