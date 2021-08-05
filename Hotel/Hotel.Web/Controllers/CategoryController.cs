@@ -41,6 +41,9 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.ActionUserName = User.Identity.Name;
+                category.ActionType = "Create";
+                category.ActionTime = DateTime.Now;
                 var modelDTO = toDTOMapper.Map<CategoryModel, CategoryDTO>(category);
                 if (!service.Check(modelDTO))
                 {
@@ -69,11 +72,18 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.ActionUserId = Convert.ToInt32(User.Identity.Name);
+                model.ActionUserName = User.Identity.Name;
+                model.ActionType = "Edit";
+                model.ActionTime = DateTime.Now;
                 model.CategoryID = Int32.Parse(Request.Url.Segments[3]);
                 var modelDTO = toDTOMapper.Map<CategoryModel, CategoryDTO>(model);
-                service.Update(modelDTO.CategoryID, modelDTO);
-                return RedirectToAction("Index");
+                if (!service.Check(modelDTO))
+                {
+                    service.Update(modelDTO.CategoryID, modelDTO);
+                    return RedirectToAction("Index");
+                }
+                ModelState.AddModelError("", "This category already exists");
+                return View();
             }
             else
             {

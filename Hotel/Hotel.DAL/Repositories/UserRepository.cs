@@ -68,5 +68,13 @@ namespace Hotel.DAL.Repositories
             var data = db.Users.FirstOrDefault(u => u.Login == user.Login && u.Password == user.Password);
             return data;
         }
+
+        public int GetID(string userName)
+        {
+            var data = db.Users.FirstOrDefault(u => u.Login == userName);
+            if(data != null)
+                return data.UserID;
+            return -1;
+        }
     }
 }

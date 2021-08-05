@@ -32,6 +32,7 @@ namespace Hotel.DAL.Repositories
         {
             reservation.ClientResevation = db.Clients.Find(reservation.ClientResevation.ClientID);
             reservation.RoomReservation = db.Rooms.Find(reservation.RoomReservation.RoomID);
+            reservation.UserReservation = db.Users.Find(reservation.UserReservation.UserID);
             reservation.ReservationDate = DateTime.Now;
             db.Reservations.Add(reservation);
         }

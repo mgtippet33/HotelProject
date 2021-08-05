@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,11 @@ namespace Hotel.DAL.Entities
         public string Name { set; get; }
         [Required]
         public string Passport { set; get; }
+
+        public string ActionUserName { get; set; }
+        public string ActionType { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime ActionTime { get; set; }
 
         public override bool Equals(object obj)
         {

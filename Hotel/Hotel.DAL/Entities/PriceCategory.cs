@@ -13,9 +13,19 @@ namespace Hotel.DAL.Entities
         [Key]
         public int PriceCategoryID { set; get; }
         public int CategoryID { set; get; }
+        [Required]
         public decimal Price { set; get; }
+        [Column(TypeName = "datetime2")]
+        [Required]
         public DateTime StartDate { set; get; }
+        [Column(TypeName = "datetime2")]
+        [Required]
         public DateTime EndDate { set; get; }
+
+        public string ActionUserName { get; set; }
+        public string ActionType { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime ActionTime { get; set; }
 
         [ForeignKey("CategoryID")]
         public virtual Category CategoryName { set; get; }

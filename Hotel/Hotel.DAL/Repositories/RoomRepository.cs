@@ -48,7 +48,7 @@ namespace Hotel.DAL.Repositories
             var roomUpdate = db.Rooms.FirstOrDefault(m => m.RoomID == roomID);
             if (roomUpdate != null)
             {
-                roomUpdate.RoomCategory = db.PriceCategories.Find(value.RoomCategory.CategoryID) ?? roomUpdate.RoomCategory;
+                roomUpdate.RoomCategory = db.PriceCategories.Find(value.RoomCategory.PriceCategoryID) ?? roomUpdate.RoomCategory;
                 roomUpdate.RoomID = roomID;
                 roomUpdate.RoomName = value.RoomName ?? roomUpdate.RoomName;
                 roomUpdate.Active = value.Active;

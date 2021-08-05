@@ -11,11 +11,15 @@ namespace Hotel.BLL.DTO
         public int ReservationID { set; get; }
         public RoomDTO RoomReservation { set; get; }
         public ClientDTO ClientResevation { set; get; }
-        //public UserDTO UserReservation { set; get; }
+        public UserDTO UserReservation { set; get; }
         public DateTime? ReservationDate { set; get; }
         public DateTime ArrivalDate { set; get; }
         public DateTime DepartureDate { set; get; }
         public bool SettledIn { set; get; }
+
+        public string ActionUserName { get; set; }
+        public string ActionType { get; set; }
+        public DateTime ActionTime { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -28,8 +32,8 @@ namespace Hotel.BLL.DTO
                     this.DepartureDate == objRes.DepartureDate &&
                     this.SettledIn == objRes.SettledIn &&
                     this.RoomReservation.Equals(objRes.RoomReservation) &&
-                    this.ClientResevation.Equals(objRes.ClientResevation); //&&
-                    //this.UserReservation.Equals(objRes.UserReservation);
+                    this.ClientResevation.Equals(objRes.ClientResevation) &&
+                    this.UserReservation.Equals(objRes.UserReservation);
             }
             return base.Equals(obj);
         }

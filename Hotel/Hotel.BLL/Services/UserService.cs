@@ -68,5 +68,11 @@ namespace Hotel.BLL.Services
             var result = DataBase.Users.Login(data);
             return toDTOMapper.Map<User, UserDTO>(result);
         }
+
+        public int GetID(string userName)
+        {
+            var result = DataBase.Users.GetID(userName);
+            return result;
+        }
     }
 }

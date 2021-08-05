@@ -13,6 +13,10 @@ namespace Hotel.BLL.DTO
         public PriceCategoryDTO RoomCategory { set; get; }
         public bool Active { set; get; }
 
+        public string ActionUserName { get; set; }
+        public string ActionType { get; set; }
+        public DateTime ActionTime { get; set; }
+
         public override bool Equals(object obj)
         {
             if (obj is RoomDTO)

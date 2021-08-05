@@ -110,6 +110,13 @@ namespace Hotel.DAL.EF
                     Password = "nix",
                     Surname = "nix",
                     Name = "nix"
+                },
+                new User()
+                {
+                    Login = "ivanov",
+                    Password = "5C00D8A50CE2679C308F5AF180B01430282CD6C9DF6AFD0E7CCC90A2B3955488",
+                    Surname = "ivanov",
+                    Name = "ivanov"
                 }
             };
             foreach (var user in userList)
@@ -156,7 +163,7 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 1,
                     ClientID = 1,
-                    //UserID = 1,
+                    UserID = 1,
                     ReservationDate = DateTime.Parse("30.06.2021"),
                     ArrivalDate = DateTime.Parse("01.07.2021"),
                     DepartureDate = DateTime.Parse("15.07.2021"),
@@ -166,7 +173,7 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 1,
                     ClientID = 1,
-                    //UserID = 1,
+                    UserID = 1,
                     ReservationDate = DateTime.Parse("30.06.2021"),
                     ArrivalDate = DateTime.Parse("01.07.2021"),
                     DepartureDate = DateTime.Parse("15.07.2021"),
@@ -176,7 +183,7 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 2,
                     ClientID = 2,
-                    //UserID = 1,
+                    UserID = 1,
                     ReservationDate = DateTime.Parse("15.06.2021"),
                     ArrivalDate = DateTime.Parse("04.07.2021"),
                     DepartureDate = DateTime.Parse("10.07.2021"),
@@ -186,7 +193,7 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 3,
                     ClientID = 3,
-                    //UserID = 1,
+                    UserID = 1,
                     ReservationDate = DateTime.Parse("01.07.2021"),
                     ArrivalDate = DateTime.Parse("10.07.2021"),
                     DepartureDate = DateTime.Parse("15.07.2021"),
@@ -196,7 +203,7 @@ namespace Hotel.DAL.EF
                 {
                     RoomID = 3,
                     ClientID = 2,
-                    //UserID = 1,
+                    UserID = 1,
                     ReservationDate = DateTime.Parse("02.07.2021"),
                     ArrivalDate = DateTime.Parse("02.08.2021"),
                     DepartureDate = DateTime.Parse("21.08.2021"),

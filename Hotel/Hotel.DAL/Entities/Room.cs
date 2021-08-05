@@ -14,8 +14,14 @@ namespace Hotel.DAL.Entities
         public int RoomID { set; get; }
         [Required]
         public string RoomName { set; get; }
+        [Required]
         public int PriceCategoryID { set; get; }
         public bool Active { set; get; }
+
+        public string ActionUserName { get; set; }
+        public string ActionType { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime ActionTime { get; set; }
 
         [ForeignKey("PriceCategoryID")]
         public virtual PriceCategory RoomCategory { set; get; }

@@ -14,5 +14,9 @@ namespace Hotel.Web.Models
         public string CategoryName { set; get; }
         [DisplayName("Lying places")]
         public int Capacity { set; get; }
+
+        public string ActionUserName { get; set; }
+        public string ActionType { get; set; }
+        public DateTime ActionTime { get; set; }
     }
 }

@@ -12,24 +12,33 @@ namespace Hotel.DAL.Entities
     {
         [Key]
         public int ReservationID { set; get; }
+        [Required]
         public int RoomID { set; get; }
+        [Required]
         public int ClientID { set; get; }
-        //public int UserID { set; get; }
+        [Required]
+        public int UserID { set; get; }
         [Column(TypeName = "datetime2")]
         public DateTime? ReservationDate { set; get; }
         [Column(TypeName = "datetime2")]
+        [Required]
         public DateTime ArrivalDate { set; get; }
         [Column(TypeName = "datetime2")]
+        [Required]
         public DateTime DepartureDate { set; get; }
         public bool SettledIn { set; get; }
 
+        public string ActionUserName { get; set; }
+        public string ActionType { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime ActionTime { get; set; }
 
+        [ForeignKey("UserID")]
+        public virtual User UserReservation { set; get; }
         [ForeignKey("RoomID")]
         public virtual Room RoomReservation { set; get; }
         [ForeignKey("ClientID")]
         public virtual Client ClientResevation { set; get; }
-        //[ForeignKey("UserID")]
-        //public virtual User UserReservation { set; get; }
 
         public override bool Equals(object obj)
         {
@@ -42,8 +51,8 @@ namespace Hotel.DAL.Entities
                     this.DepartureDate == objRes.DepartureDate &&
                     this.SettledIn == objRes.SettledIn &&
                     this.RoomReservation.Equals(objRes.RoomReservation) &&
-                    this.ClientResevation.Equals(objRes.ClientResevation);  /*&&*/
-                    //this.UserReservation.Equals(objRes.UserReservation);
+                    this.ClientResevation.Equals(objRes.ClientResevation) &&
+                    this.UserReservation.Equals(objRes.UserReservation);
             }
             return base.Equals(obj);
         }

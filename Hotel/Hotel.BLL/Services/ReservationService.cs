@@ -28,6 +28,7 @@ namespace Hotel.BLL.Services
                     cfg.CreateMap<PriceCategoryDTO, PriceCategory>().ReverseMap();
                     cfg.CreateMap<CategoryDTO, Category>().ReverseMap();
                     cfg.CreateMap<ClientDTO, Client>().ReverseMap();
+                    cfg.CreateMap<UserDTO, User>().ReverseMap();
                 }).CreateMapper();
 
             toDTOMapper = new MapperConfiguration(
@@ -38,6 +39,7 @@ namespace Hotel.BLL.Services
                     cfg.CreateMap<PriceCategory, PriceCategoryDTO>().ReverseMap();
                     cfg.CreateMap<Category, CategoryDTO>().ReverseMap();
                     cfg.CreateMap<Client, ClientDTO>().ReverseMap();
+                    cfg.CreateMap<User, UserDTO>().ReverseMap();
                 }).CreateMapper();
         }
 

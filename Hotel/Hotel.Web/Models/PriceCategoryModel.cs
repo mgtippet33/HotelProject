@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -17,5 +18,9 @@ namespace Hotel.Web.Models
         public DateTime StartDate { set; get; }
         [DisplayName("End of category")]
         public DateTime EndDate { set; get; }
+
+        public string ActionUserName { get; set; }
+        public string ActionType { get; set; }
+        public DateTime ActionTime { get; set; }
     }
 }

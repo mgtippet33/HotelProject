@@ -15,15 +15,18 @@ namespace Hotel.Web.Controllers
         private IService<ReservationDTO> reservationService;
         private IService<RoomDTO> roomService;
         private IService<ClientDTO> clientService;
+        private IUserService userService;
         private IMapper fromDTOMapper, toDTOMapper;
-        private IMapper clientMapper, roomMapper;
+        private IMapper clientMapper, roomMapper, userMapper;
 
         public ReservationController(IService<ReservationDTO> reservationService,
-            IService<RoomDTO> roomService, IService<ClientDTO> clientService)
+            IService<RoomDTO> roomService, IService<ClientDTO> clientService,
+            IUserService userService)
         {
             this.reservationService = reservationService;
             this.roomService = roomService;
             this.clientService = clientService;
+            this.userService = userService;
             fromDTOMapper = new MapperConfiguration(
                cfg =>
                {
@@ -32,15 +35,17 @@ namespace Hotel.Web.Controllers
                    cfg.CreateMap<PriceCategoryDTO, PriceCategoryModel>().ReverseMap();
                    cfg.CreateMap<CategoryDTO, CategoryModel>().ReverseMap();
                    cfg.CreateMap<ClientDTO, ClientModel>().ReverseMap();
+                   cfg.CreateMap<UserDTO, UserModel>().ReverseMap();
                }).CreateMapper();
             toDTOMapper = new MapperConfiguration(
                cfg =>
                {
-                   cfg.CreateMap<ReservationDTO, ReservationModel>().ReverseMap();
-                   cfg.CreateMap<RoomDTO, RoomModel>().ReverseMap();
-                   cfg.CreateMap<PriceCategoryDTO, PriceCategoryModel>().ReverseMap();
-                   cfg.CreateMap<CategoryDTO, CategoryModel>().ReverseMap();
-                   cfg.CreateMap<ClientDTO, ClientModel>().ReverseMap();
+                   cfg.CreateMap<ReservationModel, ReservationDTO>().ReverseMap();
+                   cfg.CreateMap<RoomModel, RoomDTO>().ReverseMap();
+                   cfg.CreateMap<PriceCategoryModel, PriceCategoryDTO>().ReverseMap();
+                   cfg.CreateMap<CategoryModel, CategoryDTO>().ReverseMap();
+                   cfg.CreateMap<ClientModel, ClientDTO>().ReverseMap();
+                   cfg.CreateMap<UserModel, UserDTO>().ReverseMap();
                }).CreateMapper();
             clientMapper = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientModel>()).CreateMapper();
             roomMapper = new MapperConfiguration(
@@ -50,6 +55,8 @@ namespace Hotel.Web.Controllers
                    cfg.CreateMap<PriceCategoryDTO, PriceCategoryModel>().ReverseMap();
                    cfg.CreateMap<CategoryDTO, CategoryModel>().ReverseMap();
                }).CreateMapper();
+
+            userMapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDTO, UserModel>()).CreateMapper();
         }
 
         // GET: Reservation
@@ -83,10 +90,15 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.ActionUserId = Convert.ToInt32(User.Identity.Name);
+                int userId = userService.GetID(User.Identity.Name);
+
+                model.ActionUserName = User.Identity.Name;
+                model.ActionType = "Create";
+                model.ActionTime = DateTime.Now;
                 var modelDTO = toDTOMapper.Map<ReservationModel, ReservationDTO>(model);
                 if (!reservationService.Check(modelDTO))
                 {
+                    modelDTO.UserReservation = new UserDTO() { UserID = userId };
                     reservationService.Create(modelDTO);
                     return RedirectToAction("Index");
                 }
@@ -103,7 +115,7 @@ namespace Hotel.Web.Controllers
         {
             var clients = clientMapper.Map<IEnumerable<ClientDTO>, List<ClientModel>>(clientService.GetAll());
             var rooms = roomMapper.Map<IEnumerable<RoomDTO>, List<RoomModel>>(roomService.GetAll());
-            SelectList clientList = new SelectList(clients, "ClientID", "Surname", "Name");
+            SelectList clientList = new SelectList(clients, "ClientID", "FullName");
             SelectList roomList = new SelectList(rooms, "RoomID", "RoomName");
             ViewBag.Clients = clientList;
             ViewBag.Rooms = roomList;
@@ -117,7 +129,12 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.ActionUserId = Convert.ToInt32(User.Identity.Name);
+                int userId = userService.GetID(User.Identity.Name);
+                UserDTO user = userService.Get(userId);
+                model.UserResevation = userMapper.Map<UserDTO, UserModel>(user);
+                model.ActionUserName = User.Identity.Name;
+                model.ActionType = "Edit";
+                model.ActionTime = DateTime.Now;
                 model.ReservationID = Int32.Parse(Request.Url.Segments[3]);
                 var modelDTO = toDTOMapper.Map<ReservationModel, ReservationDTO>(model);
                 if (!reservationService.Check(modelDTO))

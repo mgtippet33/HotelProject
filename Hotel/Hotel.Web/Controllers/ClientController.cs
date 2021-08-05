@@ -47,7 +47,9 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.ActionUserId = Convert.ToInt32(User.Identity.Name);
+                model.ActionUserName = User.Identity.Name;
+                model.ActionType = "Create";
+                model.ActionTime = DateTime.Now;
                 var modelDTO = toDTOMapper.Map<ClientModel, ClientDTO>(model);
                 if (!service.Check(modelDTO))
                 {
@@ -76,7 +78,9 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.ActionUserId = Convert.ToInt32(User.Identity.Name);
+                model.ActionUserName = User.Identity.Name;
+                model.ActionType = "Edit";
+                model.ActionTime = DateTime.Now;
                 model.ClientID = Int32.Parse(Request.Url.Segments[3]);
                 var modelDTO = toDTOMapper.Map<ClientModel, ClientDTO>(model);
                 if (!service.Check(modelDTO))

@@ -11,6 +11,7 @@ namespace Hotel.DAL.Interfaces
     {
         IEnumerable<User> GetAll();
         User Get(int id);
+        int GetID(string userName);
         void Create(User item);
         void Update(int id, User item);
         void Delete(int id);

@@ -63,6 +63,9 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                priceCategory.ActionUserName = User.Identity.Name;
+                priceCategory.ActionType = "Create";
+                priceCategory.ActionTime = DateTime.Now;
                 var modelDTO = toDTOMapper.Map<PriceCategoryModel, PriceCategoryDTO>(priceCategory);
                 if (!priceCategoryService.Check(modelDTO))
                 {
@@ -94,7 +97,9 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.ActionUserId = Convert.ToInt32(User.Identity.Name);
+                model.ActionUserName = User.Identity.Name;
+                model.ActionType = "Edit";
+                model.ActionTime = DateTime.Now;
                 model.PriceCategoryID = Int32.Parse(Request.Url.Segments[3]);
                 var modelDTO = toDTOMapper.Map<PriceCategoryModel, PriceCategoryDTO>(model);
                 if (!priceCategoryService.Check(modelDTO))

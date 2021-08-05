@@ -76,7 +76,9 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.ActionUserId = Convert.ToInt32(User.Identity.Name);
+                model.ActionUserName = User.Identity.Name;
+                model.ActionType = "Create";
+                model.ActionTime = DateTime.Now;
                 var modelDTO = toDTOMapper.Map<RoomModel, RoomDTO>(model);
                 if (!roomService.Check(modelDTO))
                 {
@@ -108,16 +110,13 @@ namespace Hotel.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.ActionUserId = Convert.ToInt32(User.Identity.Name);
+                model.ActionUserName = User.Identity.Name;
+                model.ActionType = "Edit";
+                model.ActionTime = DateTime.Now;
                 model.RoomID = Int32.Parse(Request.Url.Segments[3]);
                 var modelDTO = toDTOMapper.Map<RoomModel, RoomDTO>(model);
-                if (!roomService.Check(modelDTO))
-                {
-                    roomService.Update(modelDTO.RoomID, modelDTO);
-                    return RedirectToAction("Index");
-                }
-                ModelState.AddModelError("", "This room already exists");
-                return View();
+                roomService.Update(modelDTO.RoomID, modelDTO);
+                return RedirectToAction("Index");
             }
             else
             {
