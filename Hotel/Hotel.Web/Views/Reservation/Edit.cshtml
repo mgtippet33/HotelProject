@@ -4,33 +4,33 @@
 }
 
 <h2>Edit</h2>
-
+@Html.ValidationSummary(true)
 @using (Html.BeginForm())
 {
-<div class="form-horizontal">
-    <div class="form-group">
-        @Html.Label("FullName")
-        @Html.DropDownListFor(model => model.ClientResevation.ClientID, (SelectList)ViewBag.Clients)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.RoomReservation.RoomName)
-        @Html.DropDownListFor(model => model.RoomReservation.RoomID, (SelectList)ViewBag.Rooms)
-    </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("FullName")
+            @Html.DropDownListFor(model => model.ClientResevation.ClientID, (SelectList)ViewBag.Clients)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoomReservation.RoomName)
+            @Html.DropDownListFor(model => model.RoomReservation.RoomID, (SelectList)ViewBag.Rooms)
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ArrivalDate)
-        <input type="datetime-local" name="ArrivalDate" value="@Model.ArrivalDate.ToString("yyyy-MM-ddThh:mm")" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.ArrivalDate)
+            <input type="datetime-local" name="ArrivalDate" value="@Model.ArrivalDate.ToString("yyyy-MM-ddThh:mm")" />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartureDate)
+            <input type="datetime-local" name="DepartureDate" value="@Model.DepartureDate.ToString("yyyy-MM-ddThh:mm")" />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SettledIn)
+            @Html.EditorFor(model => model.SettledIn)
+        </div>
+        <div class="form-group">
+            <input type="submit" action="Edit" class="btn" value="Edit" />
+        </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.DepartureDate)
-        <input type="datetime-local" name="DepartureDate" value="@Model.DepartureDate.ToString("yyyy-MM-ddThh:mm")" />
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.SettledIn)
-        @Html.EditorFor(model => model.SettledIn)
-    </div>
-    <div class="form-group">
-        <input type="submit" action="Edit" class="btn" value="Edit" />
-    </div>
-</div>
 }
