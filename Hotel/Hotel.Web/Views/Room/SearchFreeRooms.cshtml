@@ -2,21 +2,50 @@
     ViewBag.Title = "Search Free Rooms";
 }
 
-<h2>Search Free Rooms</h2>
-@Html.ValidationSummary(true)
-@using (Html.BeginForm())
-{
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.Label("Arrival Date")
-            <input type="datetime-local" name="ArrivalDate" id="ArrivalDate" />
-        </div>
-        <div class="form-group">
-            @Html.Label("Departure Date")
-            <input type="datetime-local" name="DepartureDate" id="DepartureDate" />
-        </div>
-        <div class="form-group">
-            <input type="submit" action="SearchFreeRooms" class="btn" value="SearchFreeRooms" />
+<h2 class="h2 mg-bot-3 text-center">Search Free Rooms</h2>
+
+<div class="container-fluid h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-sm-12">
+            <div class="row justify-content-center">
+                <div class="col-4 text-center">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="input-group input-daterange">
+                            @Html.Label("Arrival Date",
+                            new
+                            {
+                            htmlattributes = new
+                            {
+                            @class = "ml-3 form-control-placeholder",
+                            id = "start-p",
+                            @for = "start"
+                            }
+                            })
+                            <input type="text" id="start" class="form-control text-center" name="ArrivalDate" required readonly>
+                            <span class="fa fa-calendar" id="fa-1"></span>
+                            @Html.Label("Departure Date",
+                            new
+                            {
+                            htmlattributes = new
+                            {
+                            @class = "ml-3 form-control-placeholder",
+                            id = "end-p",
+                            @for = "end"
+                            },
+                            @style = "margin-top: 10px"
+                            })
+                            <input type="text" id="end" class="form-control text-center" name="DepartureDate" required readonly>
+                            <span class="fa fa-calendar" id="fa-2"></span>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 2%">
+                            <input type="submit" action="SearchFreeRooms" class="btn btn-primary" value="Search" />
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
-}
+</div>
+

@@ -1,23 +1,43 @@
 ﻿@model Hotel.Web.Models.CategoryModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "New Category";
 }
 
-<h2>Create</h2>
-@Html.ValidationSummary(true)
-@using (Html.BeginForm())
-{
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryName)
-            @Html.EditorFor(model => model.CategoryName)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Capacity)
-            @Html.EditorFor(model => model.Capacity)
-        </div>
-        <div class="form-group">
-            <input type="submit" action="Create" class="btn" value="Create" />
+<h2 class="h2 mg-bot-3 text-center">Category</h2>
+
+<div class="container-fluid h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-sm-12">
+            <div class="row justify-content-center">
+                <div class="col-4 text-center">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.LabelFor(model => model.CategoryName)
+                        @Html.EditorFor(model => model.CategoryName,
+                       new
+                       {
+                           htmlattributes = new
+                           {
+                               @class = "form-styling",
+                               required = "required"
+                           }
+                       })
+                        @Html.LabelFor(model => model.Capacity)
+                        @Html.EditorFor(model => model.Capacity,
+                       new
+                       {
+                           htmlattributes = new
+                           {
+                               @class = "form-styling",
+                               required = "required"
+                           }
+                       })
+                        <div class="form-group">
+                            <input type="submit" action="Create" class="btn btn-primary" value="Create" />
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
-}
+</div>

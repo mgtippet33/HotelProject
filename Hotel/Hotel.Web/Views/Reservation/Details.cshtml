@@ -3,12 +3,12 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Reservation @Model.ReservationID</h2>
+<h2 class="h2 mg-bot-3 text-center">Reservation No @Model.ReservationID</h2>
 
 <table class="table table-hover">
     <tr>
         <th>
-            @Html.Label("FullName")
+            @Html.Label("Full Name")
         </th>
         <td>
             @(Model.ClientResevation.Surname + " " + @Model.ClientResevation.Name)

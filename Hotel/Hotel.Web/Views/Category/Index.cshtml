@@ -1,9 +1,9 @@
 ﻿@model List<Hotel.Web.Models.CategoryModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Category";
 }
 
-<h2>Index</h2>
+<h2 class="h2 mg-bot-3 text-center">Categories</h2>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -47,4 +47,4 @@
         }
     </tbody>
 </table>
-@Html.ActionLink("Create", "Create", null, new[] { "btn" })
+@Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })

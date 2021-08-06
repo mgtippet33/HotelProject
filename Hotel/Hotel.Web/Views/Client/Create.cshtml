@@ -1,28 +1,54 @@
 ﻿@model Hotel.Web.Models.ClientModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "New Client";
 }
 
-<h2>Create</h2>
-@Html.ValidationSummary(true)
-@using (Html.BeginForm())
-{
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Surname)
-            @Html.EditorFor(model => model.Surname)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name)
-            @Html.EditorFor(model => model.Name)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Passport)
-            @Html.EditorFor(model => model.Passport)
-        </div>
-        <div class="form-group">
-            <input type="submit" action="Create" class="btn" value="Create" />
+<h2 class="h2 mg-bot-3 text-center">Client</h2>
+
+<div class="container-fluid h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-sm-12">
+            <div class="row justify-content-center">
+                <div class="col-4 text-center">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.LabelFor(model => model.Surname)
+                        @Html.EditorFor(model => model.Surname,
+                       new
+                       {
+                           htmlattributes = new
+                           {
+                               @class = "form-styling",
+                               required = "required"
+                           }
+                       })
+                        @Html.LabelFor(model => model.Name)
+                        @Html.EditorFor(model => model.Name,
+                       new
+                       {
+                           htmlattributes = new
+                           {
+                               @class = "form-styling",
+                               required = "required"
+                           }
+                       })
+                        @Html.LabelFor(model => model.Passport)
+                        @Html.EditorFor(model => model.Passport,
+                       new
+                       {
+                           htmlattributes = new
+                           {
+                               @class = "form-styling",
+                               required = "required"
+                           }
+                       })
+                        <div class="form-group">
+                            <input type="submit" action="Create" class="btn btn-primary" value="Create" />
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
-}
+</div>

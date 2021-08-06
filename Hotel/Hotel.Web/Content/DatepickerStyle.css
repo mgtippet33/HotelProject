@@ -1,156 +1,4 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    background-image: url("img/bg-light-4868.png");
-}
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-.footer {
-    padding-left: 2.5%;
-    padding-bottom: 0.5%;
-}
-
-.h2 {
-    margin-top: 5%;
-}
-.mg-bot-3 {
-    margin-bottom: 3%;
-}
-
-.btn-width {
-    width: 100%;
-}
-
-li {
-    list-style-type: none;
-}
-
-.validation {
-    padding-right: 3.5%;
-}
-
-input {
-    outline: none;
-}
-
-.form-sign {
-    font-size: 16px;
-    font-weight: 300;
-    padding-left: 37px;
-    padding-right: 37px;
-    padding-top: 55px;
-    transition: opacity .5s ease, transform .5s ease;
-}
-
-
-.form-styling {
-    width: 100%;
-    height: 35px;
-    padding-left: 15px;
-    border: none;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    background: #d4cfcf;
-}
-
-label {
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: 15px;
-    padding-left: 15px;
-    padding-bottom: 10px;
-    color: #000000;
-    display: block;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-.select {
-    position: relative;
-    min-width: 200px;
-}
-
-    .select svg {
-        position: absolute;
-        right: 12px;
-        top: calc(50% - 3px);
-        width: 10px;
-        height: 6px;
-        stroke-width: 2px;
-        stroke: #9098a9;
-        fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        pointer-events: none;
-    }
-
-    .select select {
-        -webkit-appearance: none;
-        padding: 7px 40px 7px 12px;
-        width: 100%;
-        border: 1px solid #e8eaed;
-        border-radius: 5px;
-        background: #fff;
-        box-shadow: 0 1px 3px -2px #9098a9;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: 16px;
-        transition: all 150ms ease;
-    }
-
-        .select select:required:invalid {
-            color: #5a667f;
-        }
-
-        .select select option {
-            color: #223254;
-        }
-
-            .select select option[value=""][disabled] {
-                display: none;
-            }
-
-        .select select:focus {
-            outline: none;
-            border-color: #07f;
-            box-shadow: 0 0 0 2px rgba(0,119,255,0.2);
-        }
-
-        .select select:hover + svg {
-            stroke: #07f;
-        }
-
-.sprites {
-    position: absolute;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-    user-select: none;
-}
-
-
-input#start, input#end {
+﻿input#start, input#end {
     padding: 22px 15px !important;
     border: 1px solid #CFD8DC !important;
     border-radius: 4px !important;
@@ -162,13 +10,13 @@ input#start, input#end {
     position: relative
 }
 
-    input#start, input#end:focus {
-        -moz-box-shadow: none !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-        border: 1px solid #1976D2 !important;
-        outline-width: 0
-    }
+input#start, input#end:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #1976D2 !important;
+    outline-width: 0
+}
 
 .fa-calendar {
     position: absolute;
@@ -179,13 +27,11 @@ input#start, input#end {
 }
 
 #fa-1 {
-    left: calc(100% - 40px);
-    top: calc(56% - 40px);
+    left: calc(50% - 40px)
 }
 
 #fa-2 {
-    left: calc(100% - 40px);
-    top: calc(106% - 40px);
+    left: calc(100% - 40px)
 }
 
 .form-control-placeholder {
@@ -235,7 +81,7 @@ button:focus {
 }
 
 .datepicker-dropdown {
-   /* top: 180px !important;*/
+    top: 180px !important;
     left: calc(50% - 173.5px) !important;
     border-right: #1976D2;
     border-left: #1976D2
@@ -357,12 +203,4 @@ tfoot tr:nth-child(2) th {
     .datepicker-dropdown.datepicker-orient-right:after {
         right: calc(50% - 5px)
     }
-}
-
-.form-control {
-    display: inline !important;
-}
-
-.input-group{
-    display: inline-block !important;
 }

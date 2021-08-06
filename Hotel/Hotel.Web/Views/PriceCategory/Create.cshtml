@@ -1,31 +1,68 @@
 ﻿@model Hotel.Web.Models.PriceCategoryModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "New Price of Category";
 }
 
-<h2>Create</h2>
-@Html.ValidationSummary(true)
-@using (Html.BeginForm())
-{
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryName.CategoryName)
-            @Html.DropDownListFor(model => model.CategoryName.CategoryID, (SelectList)ViewBag.Categories)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price)
-            @Html.EditorFor(model => model.Price)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDate)
-            <input type="datetime-local" name="StartDate" />
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndDate)
-            <input type="datetime-local" name="EndDate" />
-        </div>
-        <div class="form-group">
-            <input type="submit" action="Create" class="btn" value="Create" />
+<h2 class="h2 mg-bot-3 text-center">Price of Category</h2>
+
+<div class="container-fluid h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-sm-12">
+            <div class="row justify-content-center">
+                <div class="col-4 text-center">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.LabelFor(model => model.CategoryName.CategoryName)
+                        <label class="select">
+                            @Html.DropDownListFor(model => model.CategoryName.CategoryID, (SelectList)ViewBag.Categories)
+                        </label>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Price)
+                            @Html.EditorFor(model => model.Price,
+                            new
+                            {
+                                htmlattributes = new
+                                {
+                                    @class = "form-styling",
+                                    required = "required"
+                                }
+                            })
+                        </div>
+
+                            <div class="input-group input-daterange">
+                                @Html.LabelFor(model => model.StartDate,
+                               new
+                                    {
+                                        htmlattributes = new
+                                        {
+                                            @class = "ml-3 form-control-placeholder",
+                                   id = "start-p",
+                                            @for = "start"
+                               }
+                                    })
+                                <input type="text" id="start" class="form-control text-center" name="StartDate" required readonly>
+                                <span class="fa fa-calendar" id="fa-1"></span>
+                                @Html.LabelFor(model => model.EndDate,
+                               new
+                               {
+                                   htmlattributes = new
+                                   {
+                                       @class = "ml-3 form-control-placeholder",
+                                       id = "end-p",
+                                       @for = "end"
+                                   },
+                                   @style = "margin-top: 20px"
+                               })
+                                <input type="text" id="end" class="form-control text-center" name="EndDate" required readonly>
+                                <span class="fa fa-calendar" id="fa-2"></span>
+                            </div>
+                            <div class="form-group" style="margin-top: 2%">
+                                <input type="submit" action="Create" class="btn btn-primary" value="Create" />
+                            </div>
+                            }
+                        </div>
+            </div>
         </div>
     </div>
-}
+</div>

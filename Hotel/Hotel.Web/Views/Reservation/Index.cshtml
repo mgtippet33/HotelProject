@@ -1,15 +1,15 @@
 ﻿@model List<Hotel.Web.Models.ReservationModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reservation";
 }
 
-<h2>Index</h2>
+<h2 class="h2 mg-bot-3 text-center">Reservations</h2>
 <table class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.Label("FullName")
+                @Html.Label("Full Name")
             </th>
             <th>
                 @Html.LabelFor(model => model[0].RoomReservation.RoomName)
@@ -76,8 +76,8 @@
         }
     </tbody>
 </table>
-@Html.ActionLink("Create", "Create", null, new[] { "btn" }) <br />
+@Html.ActionLink("Create", "Create", null, new {@class = "btn btn-primary" })
 @Html.ActionLink("Monthly profit", "MonthlyProfit", new
 {
     _year = DateTime.Now.Year.ToString()
-})
+}, new { @class = "btn btn-primary" })

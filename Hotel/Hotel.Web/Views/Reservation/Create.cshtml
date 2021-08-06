@@ -1,36 +1,68 @@
 ﻿@model Hotel.Web.Models.ReservationModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "New Reservation";
 }
 
-<h2>Reservation</h2>
+<h2 class="h2 mg-bot-3 text-center">Reservation</h2>
 
-@Html.ValidationSummary(true)
-@using (Html.BeginForm())
-{
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.Label("FullName")
-            @Html.DropDownListFor(model => model.ClientResevation.ClientID, (SelectList)ViewBag.Clients)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.RoomReservation.RoomName)
-            @Html.DropDownListFor(model => model.RoomReservation.RoomID, (SelectList)ViewBag.Rooms)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.ArrivalDate)
-            <input type="datetime-local" name="ArrivalDate" />
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.DepartureDate)
-            <input type="datetime-local" name="DepartureDate" />
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.SettledIn)
-            @Html.EditorFor(model => model.SettledIn)
-        </div>
-        <div class="form-group">
-            <input type="submit" action="Create" class="btn" value="Create" />
+<div class="container-fluid h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-sm-12">
+            <div class="row justify-content-center">
+                <div class="col-4 text-center">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.Label("Full Name")
+                    <label class="select">
+                        @Html.DropDownListFor(model => model.ClientResevation.ClientID, (SelectList)ViewBag.Clients)
+                        @Html.ValidationMessageFor(model => model.ClientResevation.ClientID,
+                 "", new { @class = "text-danger" })
+                    </label>
+                        @Html.LabelFor(model => model.RoomReservation.RoomName)
+                        <label class="select">
+                            @Html.DropDownListFor(model => model.RoomReservation.RoomID, (SelectList)ViewBag.Rooms,
+                    new { htmlattributes = new { required = "required" } })
+                        </label>
+
+                        <div class="input-group input-daterange">
+                            @Html.LabelFor(model => model.ArrivalDate,
+                           new
+                                {
+                                    htmlattributes = new
+                                    {
+                                        @class = "ml-3 form-control-placeholder",
+                               id = "start-p",
+                                        @for = "start"
+                           }
+                                })
+                            <input type="text" id="start" class="form-control text-center" name="ArrivalDate" required readonly>
+                            <span class="fa fa-calendar" id="fa-1"></span>
+                            @Html.LabelFor(model => model.DepartureDate,
+                           new
+                           {
+                               htmlattributes = new
+                               {
+                                   @class = "ml-3 form-control-placeholder",
+                                   id = "end-p",
+                                   @for = "end"
+                               },
+                               @style = "margin-top: 10px"
+                           })
+                            <input type="text" id="end" class="form-control text-center" name="DepartureDate" required readonly>
+                            <span class="fa fa-calendar" id="fa-2"></span>
+                        </div>
+                        @Html.LabelFor(model => model.SettledIn,
+                       new { @style = "margin-top: 10px" })
+                        @Html.EditorFor(model => model.SettledIn)
+                        <div class="form-group">
+                            <input type="submit" action="Create" class="btn btn-primary" value="Create" 
+                                   style="margin-top:15px;"/>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
-}
+</div>
+
+
