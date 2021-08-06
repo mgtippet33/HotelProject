@@ -82,13 +82,8 @@ namespace Hotel.Web.Controllers
                 model.ActionTime = DateTime.Now;
                 model.CategoryID = Int32.Parse(Request.Url.Segments[3]);
                 var modelDTO = toDTOMapper.Map<CategoryModel, CategoryDTO>(model);
-                if (!service.Check(modelDTO))
-                {
-                    service.Update(modelDTO.CategoryID, modelDTO);
-                    return RedirectToAction("Index");
-                }
-                ModelState.AddModelError("", "This category already exists");
-                return View();
+                service.Update(modelDTO.CategoryID, modelDTO);
+                return RedirectToAction("Index");
             }
             else
             {

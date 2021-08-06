@@ -80,7 +80,7 @@ namespace Hotel.Web.Controllers
         {
             var clients = clientMapper.Map<IEnumerable<ClientDTO>, List<ClientModel>>(clientService.GetAll());
             var rooms = roomMapper.Map<IEnumerable<RoomDTO>, List<RoomModel>>(roomService.GetAll());
-            SelectList clientList = new SelectList(clients, "ClientID", "Surname", "Name");
+            SelectList clientList = new SelectList(clients, "ClientID", "FullName");
             SelectList roomList = new SelectList(rooms, "RoomID", "RoomName");
             ViewBag.Clients = clientList;
             ViewBag.Rooms = roomList;
@@ -143,13 +143,8 @@ namespace Hotel.Web.Controllers
                 model.ActionTime = DateTime.Now;
                 model.ReservationID = Int32.Parse(Request.Url.Segments[3]);
                 var modelDTO = toDTOMapper.Map<ReservationModel, ReservationDTO>(model);
-                if (!reservationService.Check(modelDTO))
-                {
-                    reservationService.Update(modelDTO.ReservationID, modelDTO);
-                    return RedirectToAction("Index");
-                }
-                ModelState.AddModelError("", "This room already reserved");
-                return View();
+                reservationService.Update(modelDTO.ReservationID, modelDTO);
+                return RedirectToAction("Index");
             }
 
             ModelState.AddModelError("", "Something went wrong");

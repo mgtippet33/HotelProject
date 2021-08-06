@@ -110,13 +110,8 @@ namespace Hotel.Web.Controllers
                 model.ActionTime = DateTime.Now;
                 model.PriceCategoryID = Int32.Parse(Request.Url.Segments[3]);
                 var modelDTO = toDTOMapper.Map<PriceCategoryModel, PriceCategoryDTO>(model);
-                if (!priceCategoryService.Check(modelDTO))
-                {
-                    priceCategoryService.Update(modelDTO.PriceCategoryID, modelDTO);
-                    return RedirectToAction("Index");
-                }
-                ModelState.AddModelError("", "This category of price already exists");
-                return View();
+                priceCategoryService.Update(modelDTO.PriceCategoryID, modelDTO);
+                return RedirectToAction("Index");
             }
             else
             {

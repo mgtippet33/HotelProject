@@ -22,6 +22,7 @@ namespace Hotel.Web.Models
         public DateTime ArrivalDate { set; get; }
         [DisplayName("Date of departure")]
         public DateTime DepartureDate { set; get; }
+        [DisplayName("Settled In")]
         public bool SettledIn { set; get; }
 
         public string ActionUserName { get; set; }
