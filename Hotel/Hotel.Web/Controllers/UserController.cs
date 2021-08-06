@@ -28,59 +28,87 @@ namespace Hotel.Web.Controllers
         // GET: User
         public ActionResult Login()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserModel user)
         {
-            if (ModelState.IsValid)
+            try
             {
-                user.Password = user.HashedPassword;
-                var userDTO = toDTOMapper.Map<UserModel, UserDTO>(user);
-                var data = service.Login(userDTO);
-                if (data != null)
+                if (ModelState.IsValid)
                 {
-                    UserModel userModel = fromDTOMapper.Map<UserDTO, UserModel>(data);
-                    FormsAuthentication.SetAuthCookie(userModel.Login, true);
-                    return RedirectToAction("Index", "Category");
-                }
-                ModelState.AddModelError("", "User not found");
+                    user.Password = user.HashedPassword;
+                    var userDTO = toDTOMapper.Map<UserModel, UserDTO>(user);
+                    var data = service.Login(userDTO);
+                    if (data != null)
+                    {
+                        UserModel userModel = fromDTOMapper.Map<UserDTO, UserModel>(data);
+                        FormsAuthentication.SetAuthCookie(userModel.Login, true);
+                        return RedirectToAction("Index", "Category");
+                    }
+                    ModelState.AddModelError("", "User not found");
 
+                }
+                return View(user);
             }
-            return View(user);
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         public ActionResult Register()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         [HttpPost]
         public ActionResult Register(RegisterUserModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                UserModel user = new UserModel()
+                if (ModelState.IsValid)
                 {
-                    Login = model.Login,
-                    Password = model.HashedPassword,
-                    Surname = model.Surname,
-                    Name = model.Name
-                };
-                var userDTO = toDTOMapper.Map<UserModel, UserDTO>(user);
-                if (!service.Check(userDTO))
-                {
-                    service.Create(userDTO);
-                    return RedirectToAction("Login");
+                    UserModel user = new UserModel()
+                    {
+                        Login = model.Login,
+                        Password = model.HashedPassword,
+                        Surname = model.Surname,
+                        Name = model.Name
+                    };
+                    var userDTO = toDTOMapper.Map<UserModel, UserDTO>(user);
+                    if (!service.Check(userDTO))
+                    {
+                        service.Create(userDTO);
+                        return RedirectToAction("Login");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "User with such login already exist");
+                    }
                 }
-                else
-                {
-                    ModelState.AddModelError("", "User with such login already exist");
-                }
+                return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
     }
 }

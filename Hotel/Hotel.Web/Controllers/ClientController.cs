@@ -27,46 +27,74 @@ namespace Hotel.Web.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var data = fromDTOMapper.Map<IEnumerable<ClientDTO>, List<ClientModel>>(service.GetAll());
-            return View(data);
+            try
+            {
+                var data = fromDTOMapper.Map<IEnumerable<ClientDTO>, List<ClientModel>>(service.GetAll());
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         [Authorize]
         public ActionResult Details(int id)
         {
-            var data = fromDTOMapper.Map<ClientDTO, ClientModel>(service.Get(id));
-            return View(data);
+            try
+            {
+                var data = fromDTOMapper.Map<ClientDTO, ClientModel>(service.Get(id));
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         [HttpGet]
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         [HttpPost]
         [Authorize]
         public ActionResult Create(ClientModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                model.ActionUserName = User.Identity.Name;
-                model.ActionType = "Create";
-                model.ActionTime = DateTime.Now;
-                var modelDTO = toDTOMapper.Map<ClientModel, ClientDTO>(model);
-                if (!service.Check(modelDTO))
+                if (ModelState.IsValid)
                 {
-                    service.Create(modelDTO);
-                    return RedirectToAction("Index");
+                    model.ActionUserName = User.Identity.Name;
+                    model.ActionType = "Create";
+                    model.ActionTime = DateTime.Now;
+                    var modelDTO = toDTOMapper.Map<ClientModel, ClientDTO>(model);
+                    if (!service.Check(modelDTO))
+                    {
+                        service.Create(modelDTO);
+                        return RedirectToAction("Index");
+                    }
+                    ModelState.AddModelError("", "This client already exists");
+                    return View();
                 }
-                ModelState.AddModelError("", "This client already exists");
-                return View();
+                else
+                {
+                    ModelState.AddModelError("", "Something went wrong");
+                    return View();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ModelState.AddModelError("", "Something went wrong");
-                return View();
+                return HttpNotFound();
             }
         }
 
@@ -74,36 +102,57 @@ namespace Hotel.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var data = fromDTOMapper.Map<ClientDTO, ClientModel>(service.Get(id));
-            return View(data);
+            try
+            {
+                var data = fromDTOMapper.Map<ClientDTO, ClientModel>(service.Get(id));
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         [Authorize]
         [HttpPost]
         public ActionResult Edit(ClientModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                model.ActionUserName = User.Identity.Name;
-                model.ActionType = "Edit";
-                model.ActionTime = DateTime.Now;
-                model.ClientID = Int32.Parse(Request.Url.Segments[3]);
-                var modelDTO = toDTOMapper.Map<ClientModel, ClientDTO>(model);
-                service.Update(modelDTO.ClientID, modelDTO);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    model.ActionUserName = User.Identity.Name;
+                    model.ActionType = "Edit";
+                    model.ActionTime = DateTime.Now;
+                    model.ClientID = Int32.Parse(Request.Url.Segments[3]);
+                    var modelDTO = toDTOMapper.Map<ClientModel, ClientDTO>(model);
+                    service.Update(modelDTO.ClientID, modelDTO);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Something went wrong");
+                    return View();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ModelState.AddModelError("", "Something went wrong");
-                return View();
+                return HttpNotFound();
             }
         }
 
         [Authorize]
         public ActionResult Delete(int id)
         {
-            service.Delete(id);
-            return RedirectToAction("Index");
+            try
+            {
+                service.Delete(id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
     }
 }

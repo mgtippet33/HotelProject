@@ -42,49 +42,77 @@ namespace Hotel.Web.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var data = fromDTOMapper.Map<IEnumerable<PriceCategoryDTO>, List<PriceCategoryModel>>(priceCategoryService.GetAll());
-            return View(data);
+            try
+            {
+                var data = fromDTOMapper.Map<IEnumerable<PriceCategoryDTO>, List<PriceCategoryModel>>(priceCategoryService.GetAll());
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         [Authorize]
         public ActionResult Details(int id)
         {
-            var data = fromDTOMapper.Map<PriceCategoryDTO, PriceCategoryModel>(priceCategoryService.Get(id));
-            return View(data);
+            try
+            {
+                var data = fromDTOMapper.Map<PriceCategoryDTO, PriceCategoryModel>(priceCategoryService.Get(id));
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         [Authorize]
         [HttpGet]
         public ActionResult Create()
         {
-            var categories = fromDTOCategoryMapper.Map<IEnumerable<CategoryDTO>, List<CategoryModel>>(categoryService.GetAll());
-            SelectList categoriesList = new SelectList(categories, "CategoryID", "CategoryName");
-            ViewBag.Categories = categoriesList;
-            return View();
+            try
+            {
+                var categories = fromDTOCategoryMapper.Map<IEnumerable<CategoryDTO>, List<CategoryModel>>(categoryService.GetAll());
+                SelectList categoriesList = new SelectList(categories, "CategoryID", "CategoryName");
+                ViewBag.Categories = categoriesList;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         [Authorize]
         [HttpPost]
         public ActionResult Create(PriceCategoryModel priceCategory)
         {
-            if (ModelState.IsValid)
+            try
             {
-                priceCategory.ActionUserName = User.Identity.Name;
-                priceCategory.ActionType = "Create";
-                priceCategory.ActionTime = DateTime.Now;
-                var modelDTO = toDTOMapper.Map<PriceCategoryModel, PriceCategoryDTO>(priceCategory);
-                if (!priceCategoryService.Check(modelDTO))
+                if (ModelState.IsValid)
                 {
-                    priceCategoryService.Create(modelDTO);
-                    return RedirectToAction("Index");
+                    priceCategory.ActionUserName = User.Identity.Name;
+                    priceCategory.ActionType = "Create";
+                    priceCategory.ActionTime = DateTime.Now;
+                    var modelDTO = toDTOMapper.Map<PriceCategoryModel, PriceCategoryDTO>(priceCategory);
+                    if (!priceCategoryService.Check(modelDTO))
+                    {
+                        priceCategoryService.Create(modelDTO);
+                        return RedirectToAction("Index");
+                    }
+                    ModelState.AddModelError("", "This category of price already exists");
+                    return View();
                 }
-                ModelState.AddModelError("", "This category of price already exists");
-                return View();
+                else
+                {
+                    ModelState.AddModelError("", "Something went wrong");
+                    return View();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ModelState.AddModelError("", "Something went wrong");
-                return View();
+                return HttpNotFound();
             }
         }
 
@@ -92,39 +120,59 @@ namespace Hotel.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var categories = fromDTOCategoryMapper.Map<IEnumerable<CategoryDTO>, List<CategoryModel>>(categoryService.GetAll());
-            SelectList categoriesList = new SelectList(categories, "CategoryID", "CategoryName");
-            ViewBag.Categories = categoriesList;
-            var data = fromDTOMapper.Map<PriceCategoryDTO, PriceCategoryModel>(priceCategoryService.Get(id));
-            return View(data);
+            try{
+                var categories = fromDTOCategoryMapper.Map<IEnumerable<CategoryDTO>, List<CategoryModel>>(categoryService.GetAll());
+                SelectList categoriesList = new SelectList(categories, "CategoryID", "CategoryName");
+                ViewBag.Categories = categoriesList;
+                var data = fromDTOMapper.Map<PriceCategoryDTO, PriceCategoryModel>(priceCategoryService.Get(id));
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         [Authorize]
         [HttpPost]
         public ActionResult Edit(PriceCategoryModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                model.ActionUserName = User.Identity.Name;
-                model.ActionType = "Edit";
-                model.ActionTime = DateTime.Now;
-                model.PriceCategoryID = Int32.Parse(Request.Url.Segments[3]);
-                var modelDTO = toDTOMapper.Map<PriceCategoryModel, PriceCategoryDTO>(model);
-                priceCategoryService.Update(modelDTO.PriceCategoryID, modelDTO);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    model.ActionUserName = User.Identity.Name;
+                    model.ActionType = "Edit";
+                    model.ActionTime = DateTime.Now;
+                    model.PriceCategoryID = Int32.Parse(Request.Url.Segments[3]);
+                    var modelDTO = toDTOMapper.Map<PriceCategoryModel, PriceCategoryDTO>(model);
+                    priceCategoryService.Update(modelDTO.PriceCategoryID, modelDTO);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Something went wrong");
+                    return View();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ModelState.AddModelError("", "Something went wrong");
-                return View();
+                return HttpNotFound();
             }
         }
 
         [Authorize]
         public ActionResult Delete(int id)
         {
-            priceCategoryService.Delete(id);
-            return RedirectToAction("Index");
+            try
+            {
+                priceCategoryService.Delete(id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
     }
 }
