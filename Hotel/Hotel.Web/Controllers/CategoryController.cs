@@ -24,18 +24,21 @@ namespace Hotel.Web.Controllers
         }
 
         // GET: Category
+        [Authorize]
         public ActionResult Index()
         {
             var data = fromDTOMapper.Map<IEnumerable<CategoryDTO>, List<CategoryModel>>(service.GetAll());
             return View(data);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Create(CategoryModel category)
         {
@@ -60,6 +63,7 @@ namespace Hotel.Web.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -67,6 +71,7 @@ namespace Hotel.Web.Controllers
             return View(data);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(CategoryModel model)
         {
@@ -92,6 +97,7 @@ namespace Hotel.Web.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             service.Delete(id);

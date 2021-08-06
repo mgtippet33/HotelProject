@@ -60,18 +60,21 @@ namespace Hotel.Web.Controllers
         }
 
         // GET: Reservation
+        [Authorize]
         public ActionResult Index()
         {
             var data = fromDTOMapper.Map<IEnumerable<ReservationDTO>, List<ReservationModel>>(reservationService.GetAll());
             return View(data);
         }
 
+        [Authorize]
         public ActionResult Details(int id)
         {
             var data = fromDTOMapper.Map<ReservationDTO, ReservationModel>(reservationService.Get(id));
             return View(data);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Create()
         {
@@ -85,6 +88,7 @@ namespace Hotel.Web.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Create(ReservationModel model)
         {
@@ -110,6 +114,7 @@ namespace Hotel.Web.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -124,6 +129,7 @@ namespace Hotel.Web.Controllers
             return View(data);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(ReservationModel model)
         {
@@ -150,12 +156,14 @@ namespace Hotel.Web.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             reservationService.Delete(id);
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult CheckIn(int reservationID)
         {
             var reservation = reservationService.Get(reservationID);
@@ -167,6 +175,7 @@ namespace Hotel.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult MonthlyProfit(string _year)
         {
             int year = int.Parse(_year);

@@ -24,12 +24,14 @@ namespace Hotel.Web.Controllers
         }
 
         // GET: Client
+        [Authorize]
         public ActionResult Index()
         {
             var data = fromDTOMapper.Map<IEnumerable<ClientDTO>, List<ClientModel>>(service.GetAll());
             return View(data);
         }
 
+        [Authorize]
         public ActionResult Details(int id)
         {
             var data = fromDTOMapper.Map<ClientDTO, ClientModel>(service.Get(id));
@@ -37,12 +39,14 @@ namespace Hotel.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(ClientModel model)
         {
             if (ModelState.IsValid)
@@ -66,6 +70,7 @@ namespace Hotel.Web.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -73,6 +78,7 @@ namespace Hotel.Web.Controllers
             return View(data);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(ClientModel model)
         {
@@ -98,6 +104,7 @@ namespace Hotel.Web.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             service.Delete(id);

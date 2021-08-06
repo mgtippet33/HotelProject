@@ -12,6 +12,7 @@ namespace Hotel.Web.Models
     public class UserModel
     {
         public int UserID { set; get; }
+        [Display(Name = "Username")]
         [Required]
         public string Login { set; get; }
         [DataType(DataType.Password)]

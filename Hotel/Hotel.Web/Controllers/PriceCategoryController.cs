@@ -37,18 +37,23 @@ namespace Hotel.Web.Controllers
                 }).CreateMapper();
             fromDTOCategoryMapper = new MapperConfiguration(cfg => cfg.CreateMap<CategoryDTO, CategoryModel>()).CreateMapper();
         }
+
         // GET: PriceCategory
+        [Authorize]
         public ActionResult Index()
         {
             var data = fromDTOMapper.Map<IEnumerable<PriceCategoryDTO>, List<PriceCategoryModel>>(priceCategoryService.GetAll());
             return View(data);
         }
+
+        [Authorize]
         public ActionResult Details(int id)
         {
             var data = fromDTOMapper.Map<PriceCategoryDTO, PriceCategoryModel>(priceCategoryService.Get(id));
             return View(data);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Create()
         {
@@ -58,6 +63,7 @@ namespace Hotel.Web.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Create(PriceCategoryModel priceCategory)
         {
@@ -82,6 +88,7 @@ namespace Hotel.Web.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -92,6 +99,7 @@ namespace Hotel.Web.Controllers
             return View(data);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(PriceCategoryModel model)
         {
@@ -117,6 +125,7 @@ namespace Hotel.Web.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             priceCategoryService.Delete(id);

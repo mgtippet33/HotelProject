@@ -49,18 +49,21 @@ namespace Hotel.Web.Controllers
         }
 
         // GET: Room
+        [Authorize]
         public ActionResult Index()
         {
             var data = fromDTOMapper.Map<IEnumerable<RoomDTO>, List<RoomModel>>(roomService.GetAll());
             return View(data);
         }
 
+        [Authorize]
         public ActionResult Details(int id)
         {
             var data = fromDTOMapper.Map<RoomDTO, RoomModel>(roomService.Get(id));
             return View(data);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Create()
         {
@@ -71,6 +74,7 @@ namespace Hotel.Web.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Create(RoomModel model)
         {
@@ -93,6 +97,7 @@ namespace Hotel.Web.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -105,6 +110,7 @@ namespace Hotel.Web.Controllers
             return View(data);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(RoomModel model)
         {
@@ -125,18 +131,21 @@ namespace Hotel.Web.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             roomService.Delete(id);
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult SearchFreeRooms()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult SearchFreeRooms(DateTime arrivalDate, DateTime departureDate)
         {

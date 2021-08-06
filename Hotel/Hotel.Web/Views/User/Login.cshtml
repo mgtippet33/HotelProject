@@ -2,28 +2,68 @@
 @{
     ViewBag.Title = "Login";
 }
+<h2 class="h2 text-center">Login</h2>
 
-<h2>Login</h2>
-@Html.ValidationSummary(true)
+<div class="container-fluid h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-sm-12">
+            <div class="row justify-content-center">
+                <div class="col-4 text-center">
+                    @using (Html.BeginForm("Login", "User",
+                        new { ReturnUrl = ViewBag.ReturnUrl },
+                        FormMethod.Post, new { @class = "form-sign" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.LabelFor(model => model.Login)
+                        @Html.EditorFor(model => model.Login,
+                        new
+                             {
+                                 htmlattributes = new
+                        {
+                            @class = "form-styling",
+                            required = "required"
+                        }
+                             })
+                        @Html.LabelFor(model => model.Password)
+                        @Html.EditorFor(model => model.Password,
+                        new
+                             {
+                                 htmlattributes = new
+                                 {
+                            @class = "form-styling",
+                            required = "required"
+                                 }
+                             })
+                        <div class="form-group validation">
+                            @Html.ValidationSummary(true)
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn-width btn btn-primary" value="Login" />
+                        </div>
+                    }
+                    @Html.ActionLink("Sign Up", "Register", routeValues: null, htmlAttributes: new[] { "btn" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+@*<div class="form-horizontal">
         <div class="form-group">
             @Html.LabelFor(model => model.Login)
-            @Html.EditorFor(model => model.Login)
-            @Html.ValidationMessageFor(model => model.Login)
+            @Html.EditorFor(model => model.Login,
+           new { htmlattributes = new { required = "required" } })
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Password)
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
+            @Html.EditorFor(model => model.Password,
+           new { htmlattributes = new { required = "required" } })
         </div>
         <div class="form-group">
-            <input type="submit" class="btn" value="Log In" />
+            @Html.ValidationSummary(true)
         </div>
-    </div>
-}
-@Html.ActionLink("Register", "Register", routeValues: null, htmlAttributes: new[] { "btn" })
+        <div class="form-group">
+            <input type="submit" class="btn-width btn btn-primary" value="Login" />
+        </div>
+    </div>*@

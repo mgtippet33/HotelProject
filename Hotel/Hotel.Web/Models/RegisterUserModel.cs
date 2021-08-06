@@ -18,6 +18,7 @@ namespace Hotel.Web.Models
         //[RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6}$")]
         public string Password { set; get; }
         [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "Passwords didn't match")]
         [Required]
         //[RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6}$")]

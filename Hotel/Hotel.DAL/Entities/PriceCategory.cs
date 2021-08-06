@@ -12,6 +12,7 @@ namespace Hotel.DAL.Entities
     {
         [Key]
         public int PriceCategoryID { set; get; }
+        [Required]
         public int CategoryID { set; get; }
         [Required]
         public decimal Price { set; get; }
